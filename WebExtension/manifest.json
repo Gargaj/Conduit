@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "Conduit browser add-on",
+  "version": "1.0",
+  "homepage_url": "https://github.com/Gargaj/Conduit",
+
+  "description": "Adds conduit:// protocol links to Pouet and Demozoo",
+
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.pouet.net/*"
+      ],
+      "js": ["pouet.js"]
+    },
+    {
+      "matches": [
+        "*://*.demozoo.org/productions/*"
+      ],
+      "js": ["demozoo.js"]
+    }
+  ]
+
+}
