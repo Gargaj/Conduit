@@ -1,6 +1,10 @@
 # Conduit
 
+![logo](https://user-images.githubusercontent.com/1702533/34439501-b899a1e6-ecae-11e7-832f-9957af88558b.png)
+
 Easy demowatching - a single click bringing you the finest in computer art!
+
+![untitled-2](https://user-images.githubusercontent.com/1702533/34439509-c1191d60-ecae-11e7-9df5-c47767c8f7a1.png)
 
 ## How to use
 1. Download and install Conduit via the handy dandy [installer](https://github.com/Gargaj/Conduit/releases) - this will install a handler for the **conduit://** URL scheme
