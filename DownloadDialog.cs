@@ -167,6 +167,8 @@ namespace Conduit
         return;
       }
 
+      this.Text = "Conduit - downloading demo: " + prodInfo.Name;
+
       var url = prodInfo.DownloadLink;
       TransformURL(ref url);
 

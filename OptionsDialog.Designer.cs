@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsDialog));
       this.tabControl1 = new System.Windows.Forms.TabControl();
       this.tabGeneral = new System.Windows.Forms.TabPage();
       this.textDemoPath = new System.Windows.Forms.TextBox();
@@ -142,6 +143,7 @@
       this.Controls.Add(this.buttonOK);
       this.Controls.Add(this.buttonCancel);
       this.Controls.Add(this.tabControl1);
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Name = "OptionsDialog";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "OptionsDialog";

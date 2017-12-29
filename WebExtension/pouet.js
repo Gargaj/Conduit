@@ -13,15 +13,14 @@ function getQueryVariable(variable) {
   console.log('Query variable %s not found', variable);
 }
 
-if (link)
-{
-  var snort = [
-    "*oink*",  // en
-    "*röff*",  // hu
-    "*groin*", // fr
-    "*grunz*", // de
-    "*röh*",   // fi
-    "*&oslash;f*", // dk
-  ]
-  span.innerHTML = "[<a href='conduit://pouet/prod/"+parseInt(getQueryVariable("which"),10)+"' id='fakeDownloadLink' style='color:red;'>"+snort[ Math.floor(Math.random()*snort.length) ]+"</a>] " + span.innerHTML;
-}
+var div = document.createElement("div");
+div.className = "pouettbl";
+div.id="pouetbox_conduit";
+
+div.innerHTML = "<h2>watch this demo with conduit</h2>\n"+
+"<div class='content'>"+
+"<a href='conduit://pouet/prod/"+parseInt(getQueryVariable("which"),10)+"'><b>Click here</b></a> to download and watch this prod immediately with <a href='"+CONDUIT_URL+"'>Conduit</a>"+
+"</div>"+
+"</div>";
+
+document.getElementById("prodpagecontainer").insertBefore(div,document.getElementById("pouetbox_prodpopularityhelper"));

@@ -6,18 +6,25 @@
 
   "description": "Adds conduit:// protocol links to Pouet and Demozoo",
 
+  "icons": {
+    "48": "48.png",
+    "96": "96.png"
+  },
+  
   "content_scripts": [
     {
       "matches": [
         "*://*.pouet.net/*"
       ],
-      "js": ["pouet.js"]
+      "css": ["pouet.css"],
+      "js": ["common.js","pouet.js"]
     },
     {
       "matches": [
         "*://*.demozoo.org/productions/*"
       ],
-      "js": ["demozoo.js"]
+      "css": ["demozoo.css"],
+      "js": ["common.js","demozoo.js"]
     }
   ]
 
