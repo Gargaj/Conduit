@@ -2,6 +2,8 @@
 
 ![logo](https://user-images.githubusercontent.com/1702533/34439501-b899a1e6-ecae-11e7-832f-9957af88558b.png)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/xba3kmigbnuffrji?svg=true)](https://ci.appveyor.com/project/Gargaj/conduit)
+
 Easy demowatching - a single click bringing you the finest in computer art!
 
 ![pouet](https://user-images.githubusercontent.com/1702533/34439509-c1191d60-ecae-11e7-9df5-c47767c8f7a1.png)
