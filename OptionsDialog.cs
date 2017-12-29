@@ -17,6 +17,12 @@ namespace Conduit
       InitializeComponent();
     }
 
+    public DialogResult ShowDialogWithOpenTab(string tab)
+    {
+      tabControl1.SelectTab(tab);
+      return ShowDialog();
+    }
+
     private void OptionsDialog_Load(object sender, EventArgs e)
     {
       textDemoPath.Text = Settings.Options.DemoPath;
@@ -29,6 +35,19 @@ namespace Conduit
       Settings.Options.VicePath = textVicePath.Text;
       Settings.SaveSettings();
       DialogResult = DialogResult.OK;
+    }
+
+    private void butBrowseVICE_Click(object sender, EventArgs e)
+    {
+      OpenFileDialog ofd = new OpenFileDialog();
+
+      ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+      ofd.Filter = "WinVICE executable (x64.exe)|x64.exe";
+
+      if (ofd.ShowDialog() == DialogResult.OK)
+      {
+        textVicePath.Text = ofd.FileName;
+      }
     }
   }
 }

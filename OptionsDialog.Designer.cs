@@ -33,14 +33,16 @@
       this.tabGeneral = new System.Windows.Forms.TabPage();
       this.textDemoPath = new System.Windows.Forms.TextBox();
       this.label1 = new System.Windows.Forms.Label();
-      this.tabPage2 = new System.Windows.Forms.TabPage();
+      this.tabVICE = new System.Windows.Forms.TabPage();
       this.textVicePath = new System.Windows.Forms.TextBox();
       this.label2 = new System.Windows.Forms.Label();
       this.buttonCancel = new System.Windows.Forms.Button();
       this.buttonOK = new System.Windows.Forms.Button();
+      this.label3 = new System.Windows.Forms.Label();
+      this.butBrowseVICE = new System.Windows.Forms.Button();
       this.tabControl1.SuspendLayout();
       this.tabGeneral.SuspendLayout();
-      this.tabPage2.SuspendLayout();
+      this.tabVICE.SuspendLayout();
       this.SuspendLayout();
       // 
       // tabControl1
@@ -49,21 +51,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.tabControl1.Controls.Add(this.tabGeneral);
-      this.tabControl1.Controls.Add(this.tabPage2);
+      this.tabControl1.Controls.Add(this.tabVICE);
       this.tabControl1.Location = new System.Drawing.Point(10, 8);
       this.tabControl1.Name = "tabControl1";
       this.tabControl1.SelectedIndex = 0;
-      this.tabControl1.Size = new System.Drawing.Size(585, 156);
+      this.tabControl1.Size = new System.Drawing.Size(585, 172);
       this.tabControl1.TabIndex = 0;
       // 
       // tabGeneral
       // 
+      this.tabGeneral.Controls.Add(this.label3);
       this.tabGeneral.Controls.Add(this.textDemoPath);
       this.tabGeneral.Controls.Add(this.label1);
       this.tabGeneral.Location = new System.Drawing.Point(4, 22);
       this.tabGeneral.Name = "tabGeneral";
       this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
-      this.tabGeneral.Size = new System.Drawing.Size(577, 130);
+      this.tabGeneral.Size = new System.Drawing.Size(577, 146);
       this.tabGeneral.TabIndex = 0;
       this.tabGeneral.Text = "General";
       this.tabGeneral.UseVisualStyleBackColor = true;
@@ -84,23 +87,24 @@
       this.label1.TabIndex = 0;
       this.label1.Text = "Demo download path:";
       // 
-      // tabPage2
+      // tabVICE
       // 
-      this.tabPage2.Controls.Add(this.textVicePath);
-      this.tabPage2.Controls.Add(this.label2);
-      this.tabPage2.Location = new System.Drawing.Point(4, 22);
-      this.tabPage2.Name = "tabPage2";
-      this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage2.Size = new System.Drawing.Size(577, 130);
-      this.tabPage2.TabIndex = 1;
-      this.tabPage2.Text = "VICE";
-      this.tabPage2.UseVisualStyleBackColor = true;
+      this.tabVICE.Controls.Add(this.butBrowseVICE);
+      this.tabVICE.Controls.Add(this.textVicePath);
+      this.tabVICE.Controls.Add(this.label2);
+      this.tabVICE.Location = new System.Drawing.Point(4, 22);
+      this.tabVICE.Name = "tabVICE";
+      this.tabVICE.Padding = new System.Windows.Forms.Padding(3);
+      this.tabVICE.Size = new System.Drawing.Size(577, 146);
+      this.tabVICE.TabIndex = 1;
+      this.tabVICE.Text = "VICE";
+      this.tabVICE.UseVisualStyleBackColor = true;
       // 
       // textVicePath
       // 
       this.textVicePath.Location = new System.Drawing.Point(14, 28);
       this.textVicePath.Name = "textVicePath";
-      this.textVicePath.Size = new System.Drawing.Size(552, 20);
+      this.textVicePath.Size = new System.Drawing.Size(449, 20);
       this.textVicePath.TabIndex = 3;
       // 
       // label2
@@ -116,7 +120,7 @@
       // 
       this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-      this.buttonCancel.Location = new System.Drawing.Point(511, 170);
+      this.buttonCancel.Location = new System.Drawing.Point(511, 186);
       this.buttonCancel.Name = "buttonCancel";
       this.buttonCancel.Size = new System.Drawing.Size(84, 27);
       this.buttonCancel.TabIndex = 1;
@@ -127,7 +131,7 @@
       // 
       this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-      this.buttonOK.Location = new System.Drawing.Point(421, 170);
+      this.buttonOK.Location = new System.Drawing.Point(421, 186);
       this.buttonOK.Name = "buttonOK";
       this.buttonOK.Size = new System.Drawing.Size(84, 27);
       this.buttonOK.TabIndex = 2;
@@ -135,24 +139,43 @@
       this.buttonOK.UseVisualStyleBackColor = true;
       this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
       // 
+      // label3
+      // 
+      this.label3.AutoSize = true;
+      this.label3.Location = new System.Drawing.Point(11, 51);
+      this.label3.Name = "label3";
+      this.label3.Size = new System.Drawing.Size(417, 78);
+      this.label3.TabIndex = 2;
+      this.label3.Text = resources.GetString("label3.Text");
+      // 
+      // butBrowseVICE
+      // 
+      this.butBrowseVICE.Location = new System.Drawing.Point(469, 28);
+      this.butBrowseVICE.Name = "butBrowseVICE";
+      this.butBrowseVICE.Size = new System.Drawing.Size(92, 20);
+      this.butBrowseVICE.TabIndex = 4;
+      this.butBrowseVICE.Text = "Browse...";
+      this.butBrowseVICE.UseVisualStyleBackColor = true;
+      this.butBrowseVICE.Click += new System.EventHandler(this.butBrowseVICE_Click);
+      // 
       // OptionsDialog
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(607, 209);
+      this.ClientSize = new System.Drawing.Size(607, 225);
       this.Controls.Add(this.buttonOK);
       this.Controls.Add(this.buttonCancel);
       this.Controls.Add(this.tabControl1);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Name = "OptionsDialog";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-      this.Text = "OptionsDialog";
+      this.Text = "Conduit options and settings";
       this.Load += new System.EventHandler(this.OptionsDialog_Load);
       this.tabControl1.ResumeLayout(false);
       this.tabGeneral.ResumeLayout(false);
       this.tabGeneral.PerformLayout();
-      this.tabPage2.ResumeLayout(false);
-      this.tabPage2.PerformLayout();
+      this.tabVICE.ResumeLayout(false);
+      this.tabVICE.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -161,12 +184,14 @@
 
     private System.Windows.Forms.TabControl tabControl1;
     private System.Windows.Forms.TabPage tabGeneral;
-    private System.Windows.Forms.TabPage tabPage2;
+    private System.Windows.Forms.TabPage tabVICE;
     private System.Windows.Forms.Button buttonCancel;
     private System.Windows.Forms.Button buttonOK;
     private System.Windows.Forms.TextBox textDemoPath;
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.TextBox textVicePath;
     private System.Windows.Forms.Label label2;
+    private System.Windows.Forms.Label label3;
+    private System.Windows.Forms.Button butBrowseVICE;
   }
 }

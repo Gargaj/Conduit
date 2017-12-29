@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Conduit.Runners
 {
@@ -42,15 +43,35 @@ namespace Conduit.Runners
     public void Run(string path)
     {
       string vicePath = Settings.Options.VicePath;
-      if (vicePath == null || !File.Exists(vicePath))
+      bool viceFound = false;
+      if (vicePath != null && File.Exists(vicePath))
       {
-        return;
+        viceFound = true;
+      }
+      else
+      {
+        if (MessageBox.Show("WinVICE executable not found; do you want to set a path now?", "Conduit", MessageBoxButtons.YesNo) == DialogResult.Yes)
+        {
+          OptionsDialog dlg = new OptionsDialog();
+          DialogResult result = dlg.ShowDialogWithOpenTab("tabVICE");
+          if (result == DialogResult.OK)
+          {
+            vicePath = Settings.Options.VicePath;
+            if (vicePath != null && File.Exists(vicePath))
+            {
+              viceFound = true;
+            }
+          }
+        }
       }
 
-      ProcessStartInfo startInfo = new ProcessStartInfo(vicePath);
-      startInfo.Arguments = Path.GetFileName(path);
-      startInfo.WorkingDirectory = Path.GetDirectoryName(path);
-      Process.Start(startInfo);
+      if (viceFound)
+      {
+        ProcessStartInfo startInfo = new ProcessStartInfo(vicePath);
+        startInfo.Arguments = Path.GetFileName(path);
+        startInfo.WorkingDirectory = Path.GetDirectoryName(path);
+        Process.Start(startInfo);
+      }
     }
   }
 }
