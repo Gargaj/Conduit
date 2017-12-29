@@ -1,3 +1,5 @@
 /packages/*
 /obj/*
 /bin/*
+/Conduit.csproj.user
+/.vs/*
