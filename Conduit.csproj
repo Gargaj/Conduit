@@ -80,6 +80,7 @@
     <Compile Include="Runners\DOSBox.cs" />
     <Compile Include="Runners\VICE.cs" />
     <Compile Include="Runners\IRunner.cs" />
+    <Compile Include="Runners\Media.cs" />
     <Compile Include="Runners\WindowsExecutable.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Sites\Demozoo.cs" />
