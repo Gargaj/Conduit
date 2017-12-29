@@ -31,7 +31,7 @@ namespace Conduit.Runners
           if (reader.ReadByte() != 'E') return false;
         }
       }
-      catch (Exception e)
+      catch (Exception)
       {
         return false;
       }

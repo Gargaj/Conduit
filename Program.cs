@@ -101,7 +101,7 @@ namespace Conduit
         {
           contents = await wc.DownloadStringTaskAsync(url);
         }
-        catch (Exception e)
+        catch (Exception)
         {
         }
 
