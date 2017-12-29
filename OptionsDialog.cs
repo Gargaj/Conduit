@@ -27,12 +27,14 @@ namespace Conduit
     {
       textDemoPath.Text = Settings.Options.DemoPath;
       textVicePath.Text = Settings.Options.VicePath;
+      textDosboxPath.Text = Settings.Options.DOSBoxPath;
     }
 
     private void buttonOK_Click(object sender, EventArgs e)
     {
       Settings.Options.DemoPath = textDemoPath.Text;
       Settings.Options.VicePath = textVicePath.Text;
+      Settings.Options.DOSBoxPath = textDosboxPath.Text;
       Settings.SaveSettings();
       DialogResult = DialogResult.OK;
     }
@@ -47,6 +49,19 @@ namespace Conduit
       if (ofd.ShowDialog() == DialogResult.OK)
       {
         textVicePath.Text = ofd.FileName;
+      }
+    }
+
+    private void butBrowseDosbox_Click(object sender, EventArgs e)
+    {
+      OpenFileDialog ofd = new OpenFileDialog();
+
+      ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+      ofd.Filter = "DOSBox executable (DOSBox.exe)|DOSBox.exe";
+
+      if (ofd.ShowDialog() == DialogResult.OK)
+      {
+        textDosboxPath.Text = ofd.FileName;
       }
     }
   }

@@ -77,6 +77,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registry.cs" />
+    <Compile Include="Runners\DOSBox.cs" />
     <Compile Include="Runners\VICE.cs" />
     <Compile Include="Runners\IRunner.cs" />
     <Compile Include="Runners\WindowsExecutable.cs" />

@@ -15,6 +15,28 @@ namespace Conduit.Runners
       "*.exe",
     };
 
+    private bool IsWindowsExecutable(string filePath)
+    {
+      try
+      {
+        // Read in the DLL or EXE and get the timestamp
+        using (FileStream stream = new FileStream(filePath, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+        {
+          BinaryReader reader = new BinaryReader(stream);
+          if (reader.ReadByte() != 'M') return false;
+          if (reader.ReadByte() != 'Z') return false;
+          stream.Seek(0x3C, SeekOrigin.Begin);
+          stream.Seek(reader.ReadUInt32(), SeekOrigin.Begin);
+          if (reader.ReadByte() != 'P') return false;
+          if (reader.ReadByte() != 'E') return false;
+        }
+      }
+      catch (Exception e)
+      {
+        return false;
+      }
+      return true;
+    }
     private List<string> GetMatches(string demoDir)
     {
       List<string> files = new List<string>();
@@ -26,15 +48,17 @@ namespace Conduit.Runners
     }
     public List<string> GetRunnableFiles(string demoDir)
     {
+      List<string> result = null;
       if (File.GetAttributes(demoDir).HasFlag(FileAttributes.Directory))
       {
-        return GetMatches(demoDir);
+        result = GetMatches(demoDir);
       }
       else
       {
         var files = GetMatches(Path.GetDirectoryName(demoDir));
-        return files.Contains(demoDir) ? new List<string>() { demoDir } : new List<string>();
+        result = files.Contains(demoDir) ? new List<string>() { demoDir } : new List<string>();
       }
+      return result.Where(s => IsWindowsExecutable(s)).ToList();
     }
 
     public void Run(string path)

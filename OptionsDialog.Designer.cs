@@ -31,18 +31,23 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsDialog));
       this.tabControl1 = new System.Windows.Forms.TabControl();
       this.tabGeneral = new System.Windows.Forms.TabPage();
+      this.label3 = new System.Windows.Forms.Label();
       this.textDemoPath = new System.Windows.Forms.TextBox();
       this.label1 = new System.Windows.Forms.Label();
       this.tabVICE = new System.Windows.Forms.TabPage();
+      this.butBrowseVICE = new System.Windows.Forms.Button();
       this.textVicePath = new System.Windows.Forms.TextBox();
       this.label2 = new System.Windows.Forms.Label();
       this.buttonCancel = new System.Windows.Forms.Button();
       this.buttonOK = new System.Windows.Forms.Button();
-      this.label3 = new System.Windows.Forms.Label();
-      this.butBrowseVICE = new System.Windows.Forms.Button();
+      this.tabDOSBox = new System.Windows.Forms.TabPage();
+      this.butBrowseDosbox = new System.Windows.Forms.Button();
+      this.textDosboxPath = new System.Windows.Forms.TextBox();
+      this.label4 = new System.Windows.Forms.Label();
       this.tabControl1.SuspendLayout();
       this.tabGeneral.SuspendLayout();
       this.tabVICE.SuspendLayout();
+      this.tabDOSBox.SuspendLayout();
       this.SuspendLayout();
       // 
       // tabControl1
@@ -52,6 +57,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.tabControl1.Controls.Add(this.tabGeneral);
       this.tabControl1.Controls.Add(this.tabVICE);
+      this.tabControl1.Controls.Add(this.tabDOSBox);
       this.tabControl1.Location = new System.Drawing.Point(10, 8);
       this.tabControl1.Name = "tabControl1";
       this.tabControl1.SelectedIndex = 0;
@@ -70,6 +76,15 @@
       this.tabGeneral.TabIndex = 0;
       this.tabGeneral.Text = "General";
       this.tabGeneral.UseVisualStyleBackColor = true;
+      // 
+      // label3
+      // 
+      this.label3.AutoSize = true;
+      this.label3.Location = new System.Drawing.Point(11, 51);
+      this.label3.Name = "label3";
+      this.label3.Size = new System.Drawing.Size(417, 78);
+      this.label3.TabIndex = 2;
+      this.label3.Text = resources.GetString("label3.Text");
       // 
       // textDemoPath
       // 
@@ -99,6 +114,16 @@
       this.tabVICE.TabIndex = 1;
       this.tabVICE.Text = "VICE";
       this.tabVICE.UseVisualStyleBackColor = true;
+      // 
+      // butBrowseVICE
+      // 
+      this.butBrowseVICE.Location = new System.Drawing.Point(469, 28);
+      this.butBrowseVICE.Name = "butBrowseVICE";
+      this.butBrowseVICE.Size = new System.Drawing.Size(92, 20);
+      this.butBrowseVICE.TabIndex = 4;
+      this.butBrowseVICE.Text = "Browse...";
+      this.butBrowseVICE.UseVisualStyleBackColor = true;
+      this.butBrowseVICE.Click += new System.EventHandler(this.butBrowseVICE_Click);
       // 
       // textVicePath
       // 
@@ -139,24 +164,44 @@
       this.buttonOK.UseVisualStyleBackColor = true;
       this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
       // 
-      // label3
+      // tabDOSBox
       // 
-      this.label3.AutoSize = true;
-      this.label3.Location = new System.Drawing.Point(11, 51);
-      this.label3.Name = "label3";
-      this.label3.Size = new System.Drawing.Size(417, 78);
-      this.label3.TabIndex = 2;
-      this.label3.Text = resources.GetString("label3.Text");
+      this.tabDOSBox.Controls.Add(this.butBrowseDosbox);
+      this.tabDOSBox.Controls.Add(this.textDosboxPath);
+      this.tabDOSBox.Controls.Add(this.label4);
+      this.tabDOSBox.Location = new System.Drawing.Point(4, 22);
+      this.tabDOSBox.Name = "tabDOSBox";
+      this.tabDOSBox.Padding = new System.Windows.Forms.Padding(3);
+      this.tabDOSBox.Size = new System.Drawing.Size(577, 146);
+      this.tabDOSBox.TabIndex = 2;
+      this.tabDOSBox.Text = "DOSBox";
+      this.tabDOSBox.UseVisualStyleBackColor = true;
       // 
-      // butBrowseVICE
+      // butBrowseDosbox
       // 
-      this.butBrowseVICE.Location = new System.Drawing.Point(469, 28);
-      this.butBrowseVICE.Name = "butBrowseVICE";
-      this.butBrowseVICE.Size = new System.Drawing.Size(92, 20);
-      this.butBrowseVICE.TabIndex = 4;
-      this.butBrowseVICE.Text = "Browse...";
-      this.butBrowseVICE.UseVisualStyleBackColor = true;
-      this.butBrowseVICE.Click += new System.EventHandler(this.butBrowseVICE_Click);
+      this.butBrowseDosbox.Location = new System.Drawing.Point(469, 28);
+      this.butBrowseDosbox.Name = "butBrowseDosbox";
+      this.butBrowseDosbox.Size = new System.Drawing.Size(92, 20);
+      this.butBrowseDosbox.TabIndex = 7;
+      this.butBrowseDosbox.Text = "Browse...";
+      this.butBrowseDosbox.UseVisualStyleBackColor = true;
+      this.butBrowseDosbox.Click += new System.EventHandler(this.butBrowseDosbox_Click);
+      // 
+      // textDosboxPath
+      // 
+      this.textDosboxPath.Location = new System.Drawing.Point(14, 28);
+      this.textDosboxPath.Name = "textDosboxPath";
+      this.textDosboxPath.Size = new System.Drawing.Size(449, 20);
+      this.textDosboxPath.TabIndex = 6;
+      // 
+      // label4
+      // 
+      this.label4.AutoSize = true;
+      this.label4.Location = new System.Drawing.Point(11, 12);
+      this.label4.Name = "label4";
+      this.label4.Size = new System.Drawing.Size(130, 13);
+      this.label4.TabIndex = 5;
+      this.label4.Text = "DOSBox executable path:";
       // 
       // OptionsDialog
       // 
@@ -176,6 +221,8 @@
       this.tabGeneral.PerformLayout();
       this.tabVICE.ResumeLayout(false);
       this.tabVICE.PerformLayout();
+      this.tabDOSBox.ResumeLayout(false);
+      this.tabDOSBox.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -193,5 +240,9 @@
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.Label label3;
     private System.Windows.Forms.Button butBrowseVICE;
+    private System.Windows.Forms.TabPage tabDOSBox;
+    private System.Windows.Forms.Button butBrowseDosbox;
+    private System.Windows.Forms.TextBox textDosboxPath;
+    private System.Windows.Forms.Label label4;
   }
 }

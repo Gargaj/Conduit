@@ -26,6 +26,7 @@ namespace Conduit
       Runners = new List<IRunner>();
       Runners.Add(new WindowsExecutable());
       Runners.Add(new VICE());
+      Runners.Add(new DOSBox());
     }
   }
 }

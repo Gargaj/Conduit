@@ -14,6 +14,7 @@ namespace Conduit
     {
       public string DemoPath { get; set; }
       public string VicePath { get; set; }
+      public string DOSBoxPath { get; set; }
     }
     public static OptionsObject Options { get; set; }
     private static string _optionsFilename = "options.json";
