@@ -4,7 +4,8 @@
 
 Easy demowatching - a single click bringing you the finest in computer art!
 
-![untitled-2](https://user-images.githubusercontent.com/1702533/34439509-c1191d60-ecae-11e7-9df5-c47767c8f7a1.png)
+![pouet](https://user-images.githubusercontent.com/1702533/34439509-c1191d60-ecae-11e7-9df5-c47767c8f7a1.png)
+![demozoo](https://user-images.githubusercontent.com/1702533/34439543-0a474d68-ecaf-11e7-9ca0-3b6b5f72f2c9.png)
 
 ## How to use
 1. Download and install Conduit via the handy dandy [installer](https://github.com/Gargaj/Conduit/releases) - this will install a handler for the **conduit://** URL scheme
