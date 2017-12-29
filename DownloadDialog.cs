@@ -69,11 +69,13 @@ namespace Conduit
       }
 
       downloadText.Text = $"Starting download from {url}...";
+      downloadProgress.Maximum = 0;
 
       string finalURL = url;
       WebResponse response = null;
       do
       {
+        // File size problem due to C# runtime bug: https://stackoverflow.com/a/34846577
         var request = WebRequest.Create(finalURL);
         if (request is HttpWebRequest)
         {
