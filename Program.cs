@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace Conduit
 {
@@ -75,6 +79,53 @@ namespace Conduit
       }
     }
 
+    private class Asset
+    {
+      public string browser_download_url { get; set; }
+    }
+    private class Release
+    {
+      public string url { get; set; }
+      public string tag_name { get; set; }
+      public string published_at { get; set; }
+      public Asset[] assets { get; set; }
+    }
+    private async static Task CheckForUpdates()
+    {
+      string url = "https://api.github.com/repos/Gargaj/Conduit/releases";
+      using (var wc = new System.Net.WebClient())
+      {
+        wc.Headers.Add("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+        string contents = "";
+        try
+        {
+          contents = await wc.DownloadStringTaskAsync(url);
+        }
+        catch (Exception e)
+        {
+        }
+
+        var response = JsonConvert.DeserializeObject<Release[]>(contents);
+        if (response != null)
+        {
+          var release = response?.OrderBy(s => s.published_at)?.FirstOrDefault();
+          if (release != null)
+          {
+            string tag_name = release.tag_name;
+            Version ourVersion = Assembly.GetEntryAssembly().GetName().Version;
+            Version latestVersion = new Version(tag_name.Substring(0,1) == "v" ? tag_name.Substring(1) : tag_name);
+            if (latestVersion.CompareTo(ourVersion) > 0)
+            {
+              if (MessageBox.Show($"A new version of Conduit is available: {tag_name}\n\nDo you want to download it?", "Conduit version check", MessageBoxButtons.YesNo) == DialogResult.Yes)
+              {
+                Process.Start(release.assets.Count() > 0 ? release.assets[0].browser_download_url : release.url);
+              }
+            }
+          }
+        }
+      }
+    }
+
     /// <summary>
     /// The main entry point for the application.
     /// </summary>
@@ -104,6 +155,10 @@ namespace Conduit
         return;
       }
 
+      #if !DEBUG
+      var task = Task.Run(async () => { await CheckForUpdates(); });
+      #endif
+
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
       if (openURL != null)
@@ -115,6 +170,10 @@ namespace Conduit
         RegisterProtocol();
         Application.Run(new MainForm());
       }
+
+      #if !DEBUG 
+      if (!task.IsCompleted) task.Wait();
+      #endif
     }
   }
 }
