@@ -218,7 +218,7 @@ namespace Conduit
       {
         await WatchDemo();
       }
-      catch (Exception ex)
+      catch (Exception)
       {
         throw;
       }
