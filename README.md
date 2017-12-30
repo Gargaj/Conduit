@@ -19,6 +19,13 @@ Easy demowatching - a single click bringing you the finest in computer art!
 * Firefox: https://addons.mozilla.org/en-US/firefox/addon/conduit-browser-addon/
 * Chrome: https://chrome.google.com/webstore/detail/conduit-browser-add-on/ljbnhnepadopkgbcbifogmfaaphhbpha
 
-## Future expansion
-* Additional sites (CSDb)
-* Additional platforms (Amiga, DOSBox, etc.)
+## Supported
+* Platforms: Windows, OSX (with Mono), Linux (with Mono)
+* Sites: Pouet, Demozoo
+* Unpackers: ZIP
+* Runnable platforms: Windows, DOS (with DOSBox), C64 (with WinVICE)
+### Possible future expansions
+* Browsers: Edge
+* Sites: CSDb
+* Runners: Amiga (with WinUAE), web browser (autodetecting browser), Atari (STeeM), other uses of WinVICE
+* Unpackers: RAR, LHA
