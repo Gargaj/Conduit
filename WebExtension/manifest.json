@@ -3,6 +3,7 @@
   "name": "Conduit browser add-on",
   "version": "1.0",
   "homepage_url": "https://github.com/Gargaj/Conduit",
+  "author": "Gargaj",
 
   "description": "Adds conduit:// protocol links to Pouet and Demozoo",
 
