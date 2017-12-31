@@ -118,7 +118,7 @@ namespace Conduit
         var response = JsonConvert.DeserializeObject<Release[]>(contents);
         if (response != null)
         {
-          var release = response?.OrderBy(s => s.published_at)?.FirstOrDefault();
+          var release = response?.OrderByDescending(s => s.published_at)?.FirstOrDefault();
           if (release != null)
           {
             string tag_name = release.tag_name;
