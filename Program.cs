@@ -11,34 +11,44 @@ namespace Conduit
 {
   static class Program
   {
-    private static void RegisterProtocolWindows(string exePath)
+    private static void RegisterProtocolWindows(string exePath, bool explicitly)
     {
       const string keyName = "Conduit";
       var root = Microsoft.Win32.Registry.ClassesRoot;
-      var subkey = root.OpenSubKey(keyName);
-      if (subkey != null)
+      try
       {
-        root.DeleteSubKeyTree(keyName);
+        var subkey = root.OpenSubKey(keyName);
+        if (subkey != null)
+        {
+          root.DeleteSubKeyTree(keyName);
+        }
+        subkey = root.CreateSubKey(keyName);
+        subkey.SetValue("URL Protocol", "");
+
+        var icon = subkey.CreateSubKey("DefaultIcon");
+        icon.SetValue(null, "\"" + exePath + "\",0");
+
+        subkey.CreateSubKey("shell").CreateSubKey("open").CreateSubKey("command").SetValue(null, "\"" + exePath + "\" -openURL %1");
       }
-      subkey = root.CreateSubKey(keyName);
-      subkey.SetValue("URL Protocol", "");
-
-      var icon = subkey.CreateSubKey("DefaultIcon");
-      icon.SetValue(null, "\""+ exePath+"\",0");
-
-      subkey.CreateSubKey("shell").CreateSubKey("open").CreateSubKey("command").SetValue(null, "\"" + exePath + "\" -openURL %1");
+      catch
+      {
+        if (explicitly)
+        {
+          MessageBox.Show("Unable to register URL scheme; please restart with administrator privileges.", "Conduit error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+      }
     }
-    private static void RegisterProtocolXDG(string exePath)
+    private static void RegisterProtocolXDG(string exePath, bool explicitly)
     {
       const string name = "Conduit";
 
       string desktopFile =
-"[Desktop Entry]\n" +
-"Type=Application\n" +
-"Version=1.0\n" +
-"Name=" + name + "\n" +
-"Exec=mono " + exePath + " -openURL\n" +
-"Terminal=false\n";
+        "[Desktop Entry]\n" +
+        "Type=Application\n" +
+        "Version=1.0\n" +
+        "Name=" + name + "\n" +
+        "Exec=mono " + exePath + " -openURL\n" +
+        "Terminal=false\n";
 
       string dir = Environment.GetEnvironmentVariable("XDG_DATA_HOME");
       if (String.IsNullOrEmpty(dir))
@@ -67,15 +77,15 @@ namespace Conduit
       Process.Start(psi).WaitForExit();
     }
 
-    private static void RegisterProtocol()
+    private static void RegisterProtocol(bool explicitly)
     {
       if (Environment.OSVersion.Platform.HasFlag(PlatformID.Win32NT))
       {
-        RegisterProtocolWindows(System.Reflection.Assembly.GetEntryAssembly().Location);
+        RegisterProtocolWindows(System.Reflection.Assembly.GetEntryAssembly().Location, explicitly);
       }
       else if (Environment.OSVersion.Platform.HasFlag(PlatformID.Unix))
       {
-        RegisterProtocolXDG(System.Reflection.Assembly.GetEntryAssembly().Location);
+        RegisterProtocolXDG(System.Reflection.Assembly.GetEntryAssembly().Location, explicitly);
       }
     }
 
@@ -113,7 +123,7 @@ namespace Conduit
           {
             string tag_name = release.tag_name;
             Version ourVersion = Assembly.GetEntryAssembly().GetName().Version;
-            Version latestVersion = new Version(tag_name.Substring(0,1) == "v" ? tag_name.Substring(1) : tag_name);
+            Version latestVersion = new Version(tag_name.Substring(0, 1) == "v" ? tag_name.Substring(1) : tag_name);
             if (latestVersion.CompareTo(ourVersion) > 0)
             {
               if (MessageBox.Show($"A new version of Conduit is available: {tag_name}\n\nDo you want to download it?", "Conduit version check", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -151,13 +161,13 @@ namespace Conduit
 
       if (registerOnly)
       {
-        RegisterProtocol();
+        RegisterProtocol(true);
         return;
       }
 
-      #if !DEBUG
+#if !DEBUG
       var task = Task.Run(async () => { await CheckForUpdates(); });
-      #endif
+#endif
 
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
@@ -167,13 +177,13 @@ namespace Conduit
       }
       else
       {
-        RegisterProtocol();
+        RegisterProtocol(false);
         Application.Run(new MainForm());
       }
 
-      #if !DEBUG 
+#if !DEBUG
       if (!task.IsCompleted) task.Wait();
-      #endif
+#endif
     }
   }
 }

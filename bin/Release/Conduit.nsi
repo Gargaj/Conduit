@@ -4,6 +4,8 @@ OutFile "conduit_setup.exe"
 
 !define CLIENT_NAME "Conduit"
 
+RequestExecutionLevel admin
+
 InstallDir "$PROGRAMFILES\Conduit"
 
 LoadLanguageFile "${NSISDIR}\Contrib\Language files\English.nlf"
