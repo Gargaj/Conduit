@@ -18,6 +18,8 @@ namespace Conduit.Runners
       "*.prg",
     };
 
+    public string Name => "VICE";
+
     private List<string> GetMatches(string demoDir)
     {
       List<string> files = new List<string>();

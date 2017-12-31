@@ -82,6 +82,12 @@
     <Compile Include="Runners\IRunner.cs" />
     <Compile Include="Runners\Media.cs" />
     <Compile Include="Runners\WindowsExecutable.cs" />
+    <Compile Include="SelectRunnableDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectRunnableDialog.Designer.cs">
+      <DependentUpon>SelectRunnableDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Sites\Demozoo.cs" />
     <Compile Include="Sites\ISite.cs" />
@@ -107,6 +113,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SelectRunnableDialog.resx">
+      <DependentUpon>SelectRunnableDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

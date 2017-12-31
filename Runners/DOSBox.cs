@@ -17,6 +17,8 @@ namespace Conduit.Runners
       "*.com",
     };
 
+    public string Name => "DOSBox";
+
     private List<string> GetMatches(string demoDir)
     {
       List<string> files = new List<string>();
@@ -28,15 +30,17 @@ namespace Conduit.Runners
     }
     public List<string> GetRunnableFiles(string demoDir)
     {
+      List<string> result = null;
       if (File.GetAttributes(demoDir).HasFlag(FileAttributes.Directory))
       {
-        return GetMatches(demoDir);
+        result = GetMatches(demoDir);
       }
       else
       {
         var files = GetMatches(Path.GetDirectoryName(demoDir));
-        return files.Contains(demoDir) ? new List<string>() { demoDir } : new List<string>();
+        result = files.Contains(demoDir) ? new List<string>() { demoDir } : new List<string>();
       }
+      return result.Where(s => !WindowsExecutable.IsWindowsExecutable(s)).ToList();
     }
 
     public void Run(string path)

@@ -15,7 +15,9 @@ namespace Conduit.Runners
       "*.exe",
     };
 
-    private bool IsWindowsExecutable(string filePath)
+    public string Name => "Windows";
+
+    public static bool IsWindowsExecutable(string filePath)
     {
       try
       {

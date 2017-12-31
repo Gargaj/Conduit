@@ -197,17 +197,29 @@ namespace Conduit
         // We couldn't unpack the file; maybe we can just run it?
         extractPath = localFileName;
       }
+      List<Runners.Runnable> runnables = new List<Runners.Runnable>();
       foreach (var runner in Registry.Runners)
       {
-        var files = runner.GetRunnableFiles(extractPath);
-        if (files.Count == 0)
+        runnables.AddRange(runner.GetRunnableFiles(extractPath).Select(s => new Runners.Runnable() { Path = s, Runner = runner }) );
+      }
+      if (runnables.Count == 0)
+      {
+        // Nothing found, error
+      }
+      else if (runnables.Count == 1)
+      {
+        runnables[0].Runner.Run(runnables[0].Path);
+      }
+      else if (runnables.Count > 1)
+      {
+        SelectRunnableDialog dlg = new SelectRunnableDialog(runnables);
+        DialogResult result = dlg.ShowDialog();
+        if (result == DialogResult.OK)
         {
-          continue;
-        }
-        if (files.Count >= 1) // Temp hack, need to pop up dialog here.
-        {
-          runner.Run(files[0]);
-          break;
+          if (dlg.SelectedRunnable != null)
+          {
+            dlg.SelectedRunnable.Runner.Run(dlg.SelectedRunnable.Path);
+          }
         }
       }
     }

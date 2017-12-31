@@ -26,6 +26,9 @@ namespace Conduit.Runners
       "*.ogg",
       "*.flac",
     };
+
+    public string Name => "Media";
+
     private List<string> GetMatches(string demoDir)
     {
       List<string> files = new List<string>();
