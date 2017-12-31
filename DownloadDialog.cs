@@ -206,7 +206,44 @@ namespace Conduit
         }
         if (files.Count >= 1) // Temp hack, need to pop up dialog here.
         {
-          runner.Run(files[0]);
+          // for executables named after the screen resolution, try to guess the correct one
+          // (could be used as the default selection for the dialog in the above comment)
+          int bestGuessIndex = -1;
+          int fallbackGuessIndex = -1;
+         
+          int width = Screen.PrimaryScreen.Bounds.Width;
+          int height = Screen.PrimaryScreen.Bounds.Height;
+          string widthString = width.ToString();
+          string heightString = height.ToString();
+          
+          for(int fileIndex = 0; fileIndex < files.Count; fileIndex++)
+          {
+            string file = files[fileIndex];
+            if (   (file.Contains(widthString) && file.Contains(heightString))
+                || ((width == 1920) && (height == 1080) && file.Contains("1080p"))
+                || ((width == 1280) && (height ==  720) && file.Contains( "720p")) )
+            {
+              bestGuessIndex = fileIndex;
+              break;
+            }
+            // fallback: only one of width and height matches (e.g. watch 1920x1080 on 1920x1200):
+            if (   (fallbackGuessIndex == -1)
+                && (   file.Contains(widthString)
+                    || file.Contains(heightString)
+                    || (file.Contains("1080p") && ((width == 1920) || (height == 1080)))
+                    || (file.Contains("720p")  && ((width == 1280) || (height == 720 ))) ))
+            {
+              fallbackGuessIndex = fileIndex;
+            }
+          }
+          if (bestGuessIndex < 0) {
+            if (fallbackGuessIndex >= 0) {
+              bestGuessIndex = fallbackGuessIndex;
+            } else {
+              bestGuessIndex = 0;
+            }
+          }
+          runner.Run(files[bestGuessIndex]);
           break;
         }
       }
