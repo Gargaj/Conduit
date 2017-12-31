@@ -15,18 +15,26 @@ namespace Conduit
     {
       const string keyName = "Conduit";
       var root = Microsoft.Win32.Registry.ClassesRoot;
-      var subkey = root.OpenSubKey(keyName);
-      if (subkey != null)
-      {
-        root.DeleteSubKeyTree(keyName);
+      try {
+        var subkey = root.OpenSubKey(keyName,true);
+        if (subkey != null)
+        {
+          root.DeleteSubKeyTree(keyName);
+        }
+        subkey = root.CreateSubKey(keyName);
+        subkey.SetValue("URL Protocol", "");
+
+        var icon = subkey.CreateSubKey("DefaultIcon");
+        icon.SetValue(null, "\""+ exePath+"\",0");
+
+        subkey.CreateSubKey("shell").CreateSubKey("open").CreateSubKey("command").SetValue(null, "\"" + exePath + "\" -openURL %1");
       }
-      subkey = root.CreateSubKey(keyName);
-      subkey.SetValue("URL Protocol", "");
-
-      var icon = subkey.CreateSubKey("DefaultIcon");
-      icon.SetValue(null, "\""+ exePath+"\",0");
-
-      subkey.CreateSubKey("shell").CreateSubKey("open").CreateSubKey("command").SetValue(null, "\"" + exePath + "\" -openURL %1");
+      catch
+      {
+        MessageBox.Show("Please restart with administrator privileges.", "meh.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        // Application.Exit();
+        Environment.Exit(1); // we seem to be a console app for some reason
+      }
     }
     private static void RegisterProtocolXDG(string exePath)
     {
