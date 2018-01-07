@@ -132,7 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Conduit.ico" />
-    <None Include="WebExtension\96.png" />
+    <None Include="..\WebExtension\96.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

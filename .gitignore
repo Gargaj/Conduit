@@ -1,5 +1,5 @@
-/packages/*
-/obj/*
-/bin/*
-/Conduit.csproj.user
-/.vs/*
+/Source/.vs/*
+/Source/bin/*
+/Source/obj/*
+/Source/packages/*
+/Source/Conduit.csproj.user

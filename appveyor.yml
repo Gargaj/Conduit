@@ -5,9 +5,10 @@ clone_depth: 50
 os: Visual Studio 2015
 
 before_build:
+  - ps: cd Source
   - nuget restore
 
 build:
-  project: Conduit.sln
+  project: Source\Conduit.sln
   parallel: true
   verbosity: minimal
