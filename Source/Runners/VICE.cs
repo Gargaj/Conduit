@@ -70,7 +70,7 @@ namespace Conduit.Runners
       if (viceFound)
       {
         ProcessStartInfo startInfo = new ProcessStartInfo(vicePath);
-        startInfo.Arguments = Path.GetFileName(path);
+        startInfo.Arguments = $"\"{Path.GetFileName(path)}\"";
         startInfo.WorkingDirectory = Path.GetDirectoryName(path);
         Process.Start(startInfo);
       }
