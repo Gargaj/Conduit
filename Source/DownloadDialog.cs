@@ -129,6 +129,11 @@ namespace Conduit
         } while (bytesRead > 0);
       }
       downloadText.Text = "Download finished!";
+
+      if (File.Exists(localFileName))
+      {
+        File.Delete(localFileName);
+      }
       File.Move(tmpFile, localFileName);
 
       return localFileName;
