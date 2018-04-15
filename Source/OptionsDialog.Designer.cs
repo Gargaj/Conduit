@@ -38,16 +38,22 @@
       this.butBrowseVICE = new System.Windows.Forms.Button();
       this.textVicePath = new System.Windows.Forms.TextBox();
       this.label2 = new System.Windows.Forms.Label();
-      this.buttonCancel = new System.Windows.Forms.Button();
-      this.buttonOK = new System.Windows.Forms.Button();
       this.tabDOSBox = new System.Windows.Forms.TabPage();
       this.butBrowseDosbox = new System.Windows.Forms.Button();
       this.textDosboxPath = new System.Windows.Forms.TextBox();
       this.label4 = new System.Windows.Forms.Label();
+      this.tabBrowser = new System.Windows.Forms.TabPage();
+      this.butBrowserPathBrowse = new System.Windows.Forms.Button();
+      this.textBrowserPath = new System.Windows.Forms.TextBox();
+      this.label5 = new System.Windows.Forms.Label();
+      this.buttonCancel = new System.Windows.Forms.Button();
+      this.buttonOK = new System.Windows.Forms.Button();
+      this.checkBoxBrowserAddFlag = new System.Windows.Forms.CheckBox();
       this.tabControl1.SuspendLayout();
       this.tabGeneral.SuspendLayout();
       this.tabVICE.SuspendLayout();
       this.tabDOSBox.SuspendLayout();
+      this.tabBrowser.SuspendLayout();
       this.SuspendLayout();
       // 
       // tabControl1
@@ -58,6 +64,7 @@
       this.tabControl1.Controls.Add(this.tabGeneral);
       this.tabControl1.Controls.Add(this.tabVICE);
       this.tabControl1.Controls.Add(this.tabDOSBox);
+      this.tabControl1.Controls.Add(this.tabBrowser);
       this.tabControl1.Location = new System.Drawing.Point(10, 8);
       this.tabControl1.Name = "tabControl1";
       this.tabControl1.SelectedIndex = 0;
@@ -141,29 +148,6 @@
       this.label2.TabIndex = 2;
       this.label2.Text = "VICE executable path:";
       // 
-      // buttonCancel
-      // 
-      this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-      this.buttonCancel.Location = new System.Drawing.Point(511, 186);
-      this.buttonCancel.Name = "buttonCancel";
-      this.buttonCancel.Size = new System.Drawing.Size(84, 27);
-      this.buttonCancel.TabIndex = 1;
-      this.buttonCancel.Text = "Cancel";
-      this.buttonCancel.UseVisualStyleBackColor = true;
-      // 
-      // buttonOK
-      // 
-      this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-      this.buttonOK.Location = new System.Drawing.Point(421, 186);
-      this.buttonOK.Name = "buttonOK";
-      this.buttonOK.Size = new System.Drawing.Size(84, 27);
-      this.buttonOK.TabIndex = 2;
-      this.buttonOK.Text = "OK";
-      this.buttonOK.UseVisualStyleBackColor = true;
-      this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-      // 
       // tabDOSBox
       // 
       this.tabDOSBox.Controls.Add(this.butBrowseDosbox);
@@ -203,6 +187,78 @@
       this.label4.TabIndex = 5;
       this.label4.Text = "DOSBox executable path:";
       // 
+      // tabBrowser
+      // 
+      this.tabBrowser.Controls.Add(this.checkBoxBrowserAddFlag);
+      this.tabBrowser.Controls.Add(this.butBrowserPathBrowse);
+      this.tabBrowser.Controls.Add(this.textBrowserPath);
+      this.tabBrowser.Controls.Add(this.label5);
+      this.tabBrowser.Location = new System.Drawing.Point(4, 22);
+      this.tabBrowser.Name = "tabBrowser";
+      this.tabBrowser.Size = new System.Drawing.Size(577, 146);
+      this.tabBrowser.TabIndex = 3;
+      this.tabBrowser.Text = "Browser";
+      this.tabBrowser.UseVisualStyleBackColor = true;
+      // 
+      // butBrowserPathBrowse
+      // 
+      this.butBrowserPathBrowse.Location = new System.Drawing.Point(469, 28);
+      this.butBrowserPathBrowse.Name = "butBrowserPathBrowse";
+      this.butBrowserPathBrowse.Size = new System.Drawing.Size(92, 20);
+      this.butBrowserPathBrowse.TabIndex = 10;
+      this.butBrowserPathBrowse.Text = "Browse...";
+      this.butBrowserPathBrowse.UseVisualStyleBackColor = true;
+      this.butBrowserPathBrowse.Click += new System.EventHandler(this.butBrowserPathBrowse_Click);
+      // 
+      // textBrowserPath
+      // 
+      this.textBrowserPath.Location = new System.Drawing.Point(14, 28);
+      this.textBrowserPath.Name = "textBrowserPath";
+      this.textBrowserPath.Size = new System.Drawing.Size(449, 20);
+      this.textBrowserPath.TabIndex = 9;
+      // 
+      // label5
+      // 
+      this.label5.AutoSize = true;
+      this.label5.Location = new System.Drawing.Point(11, 12);
+      this.label5.Name = "label5";
+      this.label5.Size = new System.Drawing.Size(163, 13);
+      this.label5.TabIndex = 8;
+      this.label5.Text = "Default browser executable path:";
+      // 
+      // buttonCancel
+      // 
+      this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+      this.buttonCancel.Location = new System.Drawing.Point(511, 186);
+      this.buttonCancel.Name = "buttonCancel";
+      this.buttonCancel.Size = new System.Drawing.Size(84, 27);
+      this.buttonCancel.TabIndex = 1;
+      this.buttonCancel.Text = "Cancel";
+      this.buttonCancel.UseVisualStyleBackColor = true;
+      // 
+      // buttonOK
+      // 
+      this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+      this.buttonOK.Location = new System.Drawing.Point(421, 186);
+      this.buttonOK.Name = "buttonOK";
+      this.buttonOK.Size = new System.Drawing.Size(84, 27);
+      this.buttonOK.TabIndex = 2;
+      this.buttonOK.Text = "OK";
+      this.buttonOK.UseVisualStyleBackColor = true;
+      this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+      // 
+      // checkBoxBrowserAddFlag
+      // 
+      this.checkBoxBrowserAddFlag.AutoSize = true;
+      this.checkBoxBrowserAddFlag.Location = new System.Drawing.Point(14, 54);
+      this.checkBoxBrowserAddFlag.Name = "checkBoxBrowserAddFlag";
+      this.checkBoxBrowserAddFlag.Size = new System.Drawing.Size(327, 17);
+      this.checkBoxBrowserAddFlag.TabIndex = 11;
+      this.checkBoxBrowserAddFlag.Text = "Add \"--allow-file-access-from-files\" command line flag for Chrome";
+      this.checkBoxBrowserAddFlag.UseVisualStyleBackColor = true;
+      // 
       // OptionsDialog
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -223,6 +279,8 @@
       this.tabVICE.PerformLayout();
       this.tabDOSBox.ResumeLayout(false);
       this.tabDOSBox.PerformLayout();
+      this.tabBrowser.ResumeLayout(false);
+      this.tabBrowser.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -244,5 +302,10 @@
     private System.Windows.Forms.Button butBrowseDosbox;
     private System.Windows.Forms.TextBox textDosboxPath;
     private System.Windows.Forms.Label label4;
+    private System.Windows.Forms.TabPage tabBrowser;
+    private System.Windows.Forms.Button butBrowserPathBrowse;
+    private System.Windows.Forms.TextBox textBrowserPath;
+    private System.Windows.Forms.Label label5;
+    private System.Windows.Forms.CheckBox checkBoxBrowserAddFlag;
   }
 }

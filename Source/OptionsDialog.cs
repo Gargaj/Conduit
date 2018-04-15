@@ -28,6 +28,8 @@ namespace Conduit
       textDemoPath.Text = Settings.Options.DemoPath;
       textVicePath.Text = Settings.Options.VicePath;
       textDosboxPath.Text = Settings.Options.DOSBoxPath;
+      textBrowserPath.Text = Settings.Options.BrowserPath;
+      checkBoxBrowserAddFlag.Checked = Settings.Options.BrowserAddFileAccessFlag;
     }
 
     private void buttonOK_Click(object sender, EventArgs e)
@@ -35,6 +37,8 @@ namespace Conduit
       Settings.Options.DemoPath = textDemoPath.Text;
       Settings.Options.VicePath = textVicePath.Text;
       Settings.Options.DOSBoxPath = textDosboxPath.Text;
+      Settings.Options.BrowserPath = textBrowserPath.Text;
+      Settings.Options.BrowserAddFileAccessFlag = checkBoxBrowserAddFlag.Checked;
       Settings.SaveSettings();
       DialogResult = DialogResult.OK;
     }
@@ -62,6 +66,19 @@ namespace Conduit
       if (ofd.ShowDialog() == DialogResult.OK)
       {
         textDosboxPath.Text = ofd.FileName;
+      }
+    }
+
+    private void butBrowserPathBrowse_Click(object sender, EventArgs e)
+    {
+      OpenFileDialog ofd = new OpenFileDialog();
+
+      ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+      ofd.Filter = "Browser executable (*.exe)|*.exe";
+
+      if (ofd.ShowDialog() == DialogResult.OK)
+      {
+        textBrowserPath.Text = ofd.FileName;
       }
     }
   }

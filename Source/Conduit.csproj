@@ -44,6 +44,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -78,6 +79,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registry.cs" />
     <Compile Include="Runners\DOSBox.cs" />
+    <Compile Include="Runners\Browser.cs" />
     <Compile Include="Runners\VICE.cs" />
     <Compile Include="Runners\IRunner.cs" />
     <Compile Include="Runners\Media.cs" />

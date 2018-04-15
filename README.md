@@ -23,9 +23,9 @@ Easy demowatching - a single click bringing you the finest in computer art!
 * Platforms: Windows, OSX (with Mono), Linux (with Mono)
 * Sites: Pouet, Demozoo
 * Unpackers: ZIP
-* Runnable platforms: Windows, DOS (with DOSBox), C64 (with WinVICE)
+* Runnable platforms: Windows, DOS (with DOSBox), C64 (with WinVICE), web browser (not yet autodetecting browser)
 ### Possible future expansions
 * Browsers: Edge
 * Sites: CSDb
-* Runners: Amiga (with WinUAE), web browser (autodetecting browser), Atari (STeeM), other uses of WinVICE
+* Runners: Amiga (with WinUAE), Atari (STeeM), other uses of WinVICE
 * Unpackers: RAR, LHA
