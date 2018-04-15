@@ -19,6 +19,7 @@ namespace Conduit.Runners
     };
 
     public string Name => "VICE";
+    public uint Priority => 100;
 
     private List<string> GetMatches(string demoDir)
     {

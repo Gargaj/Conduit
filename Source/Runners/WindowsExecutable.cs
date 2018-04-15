@@ -16,6 +16,7 @@ namespace Conduit.Runners
     };
 
     public string Name => "Windows";
+    public uint Priority => 100;
 
     public static bool IsWindowsExecutable(string filePath)
     {

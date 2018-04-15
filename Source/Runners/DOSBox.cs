@@ -18,6 +18,7 @@ namespace Conduit.Runners
     };
 
     public string Name => "DOSBox";
+    public uint Priority => 100;
 
     private List<string> GetMatches(string demoDir)
     {

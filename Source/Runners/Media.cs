@@ -28,6 +28,7 @@ namespace Conduit.Runners
     };
 
     public string Name => "Media";
+    public uint Priority => 10;
 
     private List<string> GetMatches(string demoDir)
     {

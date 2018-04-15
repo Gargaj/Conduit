@@ -203,9 +203,16 @@ namespace Conduit
         extractPath = localFileName;
       }
       List<Runners.Runnable> runnables = new List<Runners.Runnable>();
-      foreach (var runner in Registry.Runners)
+      var runners = Registry.Runners.OrderByDescending(s => s.Priority);
+      var lastPriority = runners.First().Priority;
+      foreach (var runner in runners)
       {
-        runnables.AddRange(runner.GetRunnableFiles(extractPath).Select(s => new Runners.Runnable() { Path = s, Runner = runner }) );
+        if (lastPriority != runner.Priority && runnables.Count > 0)
+        {
+          // If we've reached a different priority level, but we already have something to run, don't bother.
+          break;
+        }
+        runnables.AddRange(runner.GetRunnableFiles(extractPath).Select(s => new Runners.Runnable() { Path = s, Runner = runner }));
       }
       if (runnables.Count == 0)
       {

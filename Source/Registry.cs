@@ -27,7 +27,7 @@ namespace Conduit
       Runners.Add(new WindowsExecutable());
       Runners.Add(new VICE());
       Runners.Add(new DOSBox());
-      Runners.Add(new Media());      
+      Runners.Add(new Media());
     }
   }
 }
