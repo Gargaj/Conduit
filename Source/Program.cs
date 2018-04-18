@@ -142,6 +142,8 @@ namespace Conduit
     [STAThread]
     static void Main(string[] args)
     {
+      System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+      
       Registry.Initialize();
       Settings.LoadSettings();
 
