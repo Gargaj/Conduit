@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Conduit
@@ -30,6 +23,7 @@ namespace Conduit
       textDosboxPath.Text = Settings.Options.DOSBoxPath;
       textBrowserPath.Text = Settings.Options.BrowserPath;
       checkBoxBrowserAddFlag.Checked = Settings.Options.BrowserAddFileAccessFlag;
+      textPICO8Path.Text = Settings.Options.PICO8Path;
     }
 
     private void buttonOK_Click(object sender, EventArgs e)
@@ -39,6 +33,7 @@ namespace Conduit
       Settings.Options.DOSBoxPath = textDosboxPath.Text;
       Settings.Options.BrowserPath = textBrowserPath.Text;
       Settings.Options.BrowserAddFileAccessFlag = checkBoxBrowserAddFlag.Checked;
+      Settings.Options.PICO8Path = textPICO8Path.Text;
       Settings.SaveSettings();
       DialogResult = DialogResult.OK;
     }
@@ -79,6 +74,19 @@ namespace Conduit
       if (ofd.ShowDialog() == DialogResult.OK)
       {
         textBrowserPath.Text = ofd.FileName;
+      }
+    }
+
+    private void butBrowsePICO8_Click(object sender, EventArgs e)
+    {
+      OpenFileDialog ofd = new OpenFileDialog();
+
+      ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+      ofd.Filter = "PICO-8 executable (pico8.exe)|pico8.exe";
+
+      if (ofd.ShowDialog() == DialogResult.OK)
+      {
+        textPICO8Path.Text = ofd.FileName;
       }
     }
   }

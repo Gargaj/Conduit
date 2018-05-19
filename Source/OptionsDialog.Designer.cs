@@ -43,17 +43,22 @@
       this.textDosboxPath = new System.Windows.Forms.TextBox();
       this.label4 = new System.Windows.Forms.Label();
       this.tabBrowser = new System.Windows.Forms.TabPage();
+      this.checkBoxBrowserAddFlag = new System.Windows.Forms.CheckBox();
       this.butBrowserPathBrowse = new System.Windows.Forms.Button();
       this.textBrowserPath = new System.Windows.Forms.TextBox();
       this.label5 = new System.Windows.Forms.Label();
       this.buttonCancel = new System.Windows.Forms.Button();
       this.buttonOK = new System.Windows.Forms.Button();
-      this.checkBoxBrowserAddFlag = new System.Windows.Forms.CheckBox();
+      this.tabPICO8 = new System.Windows.Forms.TabPage();
+      this.butBrowsePICO8 = new System.Windows.Forms.Button();
+      this.textPICO8Path = new System.Windows.Forms.TextBox();
+      this.label6 = new System.Windows.Forms.Label();
       this.tabControl1.SuspendLayout();
       this.tabGeneral.SuspendLayout();
       this.tabVICE.SuspendLayout();
       this.tabDOSBox.SuspendLayout();
       this.tabBrowser.SuspendLayout();
+      this.tabPICO8.SuspendLayout();
       this.SuspendLayout();
       // 
       // tabControl1
@@ -65,6 +70,7 @@
       this.tabControl1.Controls.Add(this.tabVICE);
       this.tabControl1.Controls.Add(this.tabDOSBox);
       this.tabControl1.Controls.Add(this.tabBrowser);
+      this.tabControl1.Controls.Add(this.tabPICO8);
       this.tabControl1.Location = new System.Drawing.Point(10, 8);
       this.tabControl1.Name = "tabControl1";
       this.tabControl1.SelectedIndex = 0;
@@ -200,6 +206,16 @@
       this.tabBrowser.Text = "Browser";
       this.tabBrowser.UseVisualStyleBackColor = true;
       // 
+      // checkBoxBrowserAddFlag
+      // 
+      this.checkBoxBrowserAddFlag.AutoSize = true;
+      this.checkBoxBrowserAddFlag.Location = new System.Drawing.Point(14, 54);
+      this.checkBoxBrowserAddFlag.Name = "checkBoxBrowserAddFlag";
+      this.checkBoxBrowserAddFlag.Size = new System.Drawing.Size(327, 17);
+      this.checkBoxBrowserAddFlag.TabIndex = 11;
+      this.checkBoxBrowserAddFlag.Text = "Add \"--allow-file-access-from-files\" command line flag for Chrome";
+      this.checkBoxBrowserAddFlag.UseVisualStyleBackColor = true;
+      // 
       // butBrowserPathBrowse
       // 
       this.butBrowserPathBrowse.Location = new System.Drawing.Point(469, 28);
@@ -249,15 +265,43 @@
       this.buttonOK.UseVisualStyleBackColor = true;
       this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
       // 
-      // checkBoxBrowserAddFlag
+      // tabPICO8
       // 
-      this.checkBoxBrowserAddFlag.AutoSize = true;
-      this.checkBoxBrowserAddFlag.Location = new System.Drawing.Point(14, 54);
-      this.checkBoxBrowserAddFlag.Name = "checkBoxBrowserAddFlag";
-      this.checkBoxBrowserAddFlag.Size = new System.Drawing.Size(327, 17);
-      this.checkBoxBrowserAddFlag.TabIndex = 11;
-      this.checkBoxBrowserAddFlag.Text = "Add \"--allow-file-access-from-files\" command line flag for Chrome";
-      this.checkBoxBrowserAddFlag.UseVisualStyleBackColor = true;
+      this.tabPICO8.Controls.Add(this.butBrowsePICO8);
+      this.tabPICO8.Controls.Add(this.textPICO8Path);
+      this.tabPICO8.Controls.Add(this.label6);
+      this.tabPICO8.Location = new System.Drawing.Point(4, 22);
+      this.tabPICO8.Name = "tabPICO8";
+      this.tabPICO8.Size = new System.Drawing.Size(577, 146);
+      this.tabPICO8.TabIndex = 4;
+      this.tabPICO8.Text = "PICO-8";
+      this.tabPICO8.UseVisualStyleBackColor = true;
+      // 
+      // butBrowsePICO8
+      // 
+      this.butBrowsePICO8.Location = new System.Drawing.Point(469, 28);
+      this.butBrowsePICO8.Name = "butBrowsePICO8";
+      this.butBrowsePICO8.Size = new System.Drawing.Size(92, 20);
+      this.butBrowsePICO8.TabIndex = 10;
+      this.butBrowsePICO8.Text = "Browse...";
+      this.butBrowsePICO8.UseVisualStyleBackColor = true;
+      this.butBrowsePICO8.Click += new System.EventHandler(this.butBrowsePICO8_Click);
+      // 
+      // textPICO8Path
+      // 
+      this.textPICO8Path.Location = new System.Drawing.Point(14, 28);
+      this.textPICO8Path.Name = "textPICO8Path";
+      this.textPICO8Path.Size = new System.Drawing.Size(449, 20);
+      this.textPICO8Path.TabIndex = 9;
+      // 
+      // label6
+      // 
+      this.label6.AutoSize = true;
+      this.label6.Location = new System.Drawing.Point(11, 12);
+      this.label6.Name = "label6";
+      this.label6.Size = new System.Drawing.Size(123, 13);
+      this.label6.TabIndex = 8;
+      this.label6.Text = "PICO-8 executable path:";
       // 
       // OptionsDialog
       // 
@@ -281,6 +325,8 @@
       this.tabDOSBox.PerformLayout();
       this.tabBrowser.ResumeLayout(false);
       this.tabBrowser.PerformLayout();
+      this.tabPICO8.ResumeLayout(false);
+      this.tabPICO8.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -307,5 +353,9 @@
     private System.Windows.Forms.TextBox textBrowserPath;
     private System.Windows.Forms.Label label5;
     private System.Windows.Forms.CheckBox checkBoxBrowserAddFlag;
+    private System.Windows.Forms.TabPage tabPICO8;
+    private System.Windows.Forms.Button butBrowsePICO8;
+    private System.Windows.Forms.TextBox textPICO8Path;
+    private System.Windows.Forms.Label label6;
   }
 }

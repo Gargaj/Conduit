@@ -16,6 +16,7 @@ namespace Conduit
       public string VicePath { get; set; }
       public string DOSBoxPath { get; set; }
       public string BrowserPath { get; set; }
+      public string PICO8Path { get; set; }
       public bool BrowserAddFileAccessFlag { get; set; }
     }
     public static OptionsObject Options { get; set; }

@@ -29,6 +29,7 @@ namespace Conduit
       Runners.Add(new DOSBox());
       Runners.Add(new Browser());
       Runners.Add(new Media());
+      Runners.Add(new PICO8());
     }
   }
 }
