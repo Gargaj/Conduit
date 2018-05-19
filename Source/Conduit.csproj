@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Conduit.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Conduit.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -57,22 +57,22 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DownloadDialog.cs">
+    <Compile Include="Dialogs\DownloadDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DownloadDialog.Designer.cs">
+    <Compile Include="Dialogs\DownloadDialog.Designer.cs">
       <DependentUpon>DownloadDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Dialogs\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Dialogs\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OptionsDialog.cs">
+    <Compile Include="Dialogs\OptionsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OptionsDialog.Designer.cs">
+    <Compile Include="Dialogs\OptionsDialog.Designer.cs">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -85,10 +85,10 @@
     <Compile Include="Runners\IRunner.cs" />
     <Compile Include="Runners\Media.cs" />
     <Compile Include="Runners\WindowsExecutable.cs" />
-    <Compile Include="SelectRunnableDialog.cs">
+    <Compile Include="Dialogs\SelectRunnableDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SelectRunnableDialog.Designer.cs">
+    <Compile Include="Dialogs\SelectRunnableDialog.Designer.cs">
       <DependentUpon>SelectRunnableDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
@@ -97,13 +97,13 @@
     <Compile Include="Sites\Pouet.cs" />
     <Compile Include="Unpackers\IUnpacker.cs" />
     <Compile Include="Unpackers\Zip.cs" />
-    <EmbeddedResource Include="DownloadDialog.resx">
+    <EmbeddedResource Include="Dialogs\DownloadDialog.resx">
       <DependentUpon>DownloadDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Dialogs\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OptionsDialog.resx">
+    <EmbeddedResource Include="Dialogs\OptionsDialog.resx">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -116,7 +116,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SelectRunnableDialog.resx">
+    <EmbeddedResource Include="Dialogs\SelectRunnableDialog.resx">
       <DependentUpon>SelectRunnableDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -134,8 +134,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Conduit.ico" />
-    <None Include="..\WebExtension\96.png" />
+    <Content Include="Resources\Conduit.ico" />
+    <None Include="..\WebExtension\96.png">
+      <Link>Resources\96.png</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

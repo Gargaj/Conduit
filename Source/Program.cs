@@ -97,6 +97,7 @@ namespace Conduit
     {
       public string url { get; set; }
       public string tag_name { get; set; }
+      public string name { get; set; }
       public string published_at { get; set; }
       public Asset[] assets { get; set; }
     }
@@ -122,11 +123,12 @@ namespace Conduit
           if (release != null)
           {
             string tag_name = release.tag_name;
+            string name = release.name;
             Version ourVersion = Assembly.GetEntryAssembly().GetName().Version;
             Version latestVersion = new Version(tag_name.Substring(0, 1) == "v" ? tag_name.Substring(1) : tag_name);
             if (latestVersion.CompareTo(ourVersion) > 0)
             {
-              if (MessageBox.Show($"A new version of Conduit is available: {tag_name}\n\nDo you want to download it?", "Conduit version check", MessageBoxButtons.YesNo) == DialogResult.Yes)
+              if (MessageBox.Show($"A new version of Conduit is available: {tag_name}\n\n{name}\n\nDo you want to download it?", "Conduit version check", MessageBoxButtons.YesNo) == DialogResult.Yes)
               {
                 Process.Start(release.assets.Count() > 0 ? release.assets[0].browser_download_url : release.url);
               }
