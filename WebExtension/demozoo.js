@@ -9,7 +9,7 @@ if(download_links && download_links.length)
   var block = document.createElement("div");
   block.id = "conduit";
   block.innerHTML = 
-    "<h3>Download and run</h3>\n"+
+    "<h3 class='panel__title'>Download and run</h3>\n"+
     "<div><a href='conduit://demozoo/prod/"+parseInt(prodID[1],10)+"'><b>Click here</b></a> to download and watch this prod immediately with <a href='"+CONDUIT_URL+"'>Conduit</a>"
   block.className = "panel";
 
