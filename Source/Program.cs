@@ -143,31 +143,31 @@ namespace Conduit
     /// </summary>
     [STAThread]
     static void Main(string[] args)
-		{
-			System.Net.ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) =>
-			{
-				if (sslPolicyErrors == System.Net.Security.SslPolicyErrors.None)
-				{
-					return true;
-				}
-				else
-				{
-					if (System.Windows.Forms.MessageBox.Show($"The following server certificate is not valid:\n\n{certificate.ToString()}\n\nAccept?",
-						"Certificate Validation",
-						System.Windows.Forms.MessageBoxButtons.YesNo,
-						System.Windows.Forms.MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
-						return true;
-					else
-						return false;
-				};
-			};
+    {
+      System.Net.ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) =>
+      {
+        if (sslPolicyErrors == System.Net.Security.SslPolicyErrors.None)
+        {
+          return true;
+        }
+        else
+        {
+          if (System.Windows.Forms.MessageBox.Show($"The following server certificate is not valid:\n\n{certificate.ToString()}\n\nAccept?",
+            "Certificate Validation",
+            System.Windows.Forms.MessageBoxButtons.YesNo,
+            System.Windows.Forms.MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            return true;
+          else
+            return false;
+        };
+      };
 
-			System.Net.ServicePointManager.Expect100Continue = true;
-			System.Net.ServicePointManager.SecurityProtocol |= System.Net.SecurityProtocolType.Tls12;
-			System.Net.ServicePointManager.SecurityProtocol |= System.Net.SecurityProtocolType.Ssl3;
+      System.Net.ServicePointManager.Expect100Continue = true;
+      System.Net.ServicePointManager.SecurityProtocol |= System.Net.SecurityProtocolType.Tls12;
+      System.Net.ServicePointManager.SecurityProtocol |= System.Net.SecurityProtocolType.Ssl3;
 
-			Registry.Initialize();
-			Settings.LoadSettings();
+      Registry.Initialize();
+      Settings.LoadSettings();
 
       bool registerOnly = false;
       string openURL = null;

@@ -87,10 +87,10 @@ namespace Conduit
           if (response.Headers["Location"] != null)
           {
             finalURL = response.Headers["Location"];
-            if (response.ContentLength > 0)
-            {
-              downloadProgress.Maximum = (int)response.ContentLength;
-            }
+          }
+          if (response.ContentLength > 0)
+          {
+            downloadProgress.Maximum = (int)response.ContentLength;
           }
         }
       } while (response.Headers["Location"] != null);
