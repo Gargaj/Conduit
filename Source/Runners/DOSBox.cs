@@ -44,7 +44,7 @@ namespace Conduit.Runners
       return result.Where(s => !WindowsExecutable.IsWindowsExecutable(s)).ToList();
     }
 
-    public void Run(string path)
+    public bool Run(string path)
     {
       string dosboxPath = Settings.Options.DOSBoxPath;
       bool dosboxFound = false;
@@ -77,8 +77,10 @@ namespace Conduit.Runners
         arguments.Add($"-noautoexec");
         arguments.Add($"-exit");
         startInfo.Arguments = string.Join(" ",arguments);
-        Process.Start(startInfo);
+        var process = Process.Start(startInfo);
+        return process != null;
       }
+      return false;
     }
   }
 }

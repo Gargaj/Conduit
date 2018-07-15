@@ -44,7 +44,7 @@ namespace Conduit.Runners
       return result.Where(s => !WindowsExecutable.IsWindowsExecutable(s)).ToList();
     }
 
-    public void Run(string path)
+    public bool Run(string path)
     {
       string pico8Path = Settings.Options.PICO8Path;
       bool pico8Found = false;
@@ -76,8 +76,10 @@ namespace Conduit.Runners
         arguments.Add($"-run");
         arguments.Add($"\"{path}\"");
         startInfo.Arguments = string.Join(" ",arguments);
-        Process.Start(startInfo);
+        var process = Process.Start(startInfo);
+        return process != null;
       }
+      return false;
     }
   }
 }

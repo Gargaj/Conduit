@@ -144,26 +144,31 @@ namespace Conduit
       return System.Text.RegularExpressions.Regex.Replace(s == null ? "[unknown]" : s, @"[^a-zA-Z0-9\-_\.]+", "-").ToLower();
     }
 
-    private async Task<bool> UnpackFile(string archiveFile, string targetDir)
+    private IUnpacker FindUnpacker(string archiveFile)
     {
       foreach (var unpacker in Registry.Unpackers)
       {
         if (unpacker.CanUnpack(archiveFile))
         {
-          unpacker.ProgressChanged += (object sender, UnpackingProgressArgs e) =>
-          {
-            Dispatcher.CurrentDispatcher.Invoke(() =>
-            {
-              unpackProgress.Maximum = e.TotalFiles;
-              unpackProgress.Value = e.CurrentFile;
-              unpackText.Text = $"Unpacking {e.CurrentFilename}";
-            });
-          };
-          Directory.CreateDirectory(targetDir);
-          return await unpacker.Unpack(archiveFile, targetDir);
+          return unpacker;
         }
       }
-      return false;
+      return null;
+    }
+
+    private async Task<bool> UnpackFile(IUnpacker unpacker, string archiveFile, string targetDir)
+    {
+      unpacker.ProgressChanged += (object sender, UnpackingProgressArgs e) =>
+      {
+        Dispatcher.CurrentDispatcher.Invoke(() =>
+        {
+          unpackProgress.Maximum = e.TotalFiles;
+          unpackProgress.Value = e.CurrentFile;
+          unpackText.Text = $"Unpacking {e.CurrentFilename}";
+        });
+      };
+      Directory.CreateDirectory(targetDir);
+      return await unpacker.Unpack(archiveFile, targetDir);
     }
 
     private async Task WatchDemo()
@@ -197,10 +202,16 @@ namespace Conduit
       }
 
       var extractPath = Path.Combine(path, Path.GetFileNameWithoutExtension(localFileName));
-      if (!await UnpackFile(localFileName, extractPath))
+      var unpacker = FindUnpacker(localFileName);
+      var extractSuccessful = false;
+      if (unpacker == null)
       {
-        // We couldn't unpack the file; maybe we can just run it?
+        // We couldn't find an unpacker to the file; maybe we can just run it?
         extractPath = localFileName;
+      }
+      else
+      {
+        extractSuccessful = await UnpackFile(unpacker, localFileName, extractPath);
       }
       List<Runners.Runnable> runnables = new List<Runners.Runnable>();
       var runners = Registry.Runners.OrderByDescending(s => s.Priority);
@@ -217,20 +228,43 @@ namespace Conduit
       if (runnables.Count == 0)
       {
         // Nothing found, error
+        if (unpacker != null && !extractSuccessful)
+        {
+          // We found an unpacker but it failed
+          MessageBox.Show($"There's been an error unpacking the following file:\n{localFileName}", "Conduit error: Unpack failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        else if (unpacker != null && extractSuccessful)
+        {
+          // We found and successfully used an unpacker, but couldn't find a runner
+          MessageBox.Show($"We couldn't find a way to run the following file:\n{localFileName}", "Conduit error: Run failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        else if (unpacker == null)
+        {
+          // We couldn't find an unpacker
+          MessageBox.Show($"We couldn't find a way to unpack the following file:\n{localFileName}", "Conduit error: Unpack failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
       }
       else if (runnables.Count == 1)
       {
-        runnables[0].Runner.Run(runnables[0].Path);
+        var result = runnables[0].Runner.Run(runnables[0].Path);
+        if (!result)
+        {
+          MessageBox.Show($"There was an error starting this file:\n{runnables[0].Path}", "Conduit error: Run failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
       }
       else if (runnables.Count > 1)
       {
         SelectRunnableDialog dlg = new SelectRunnableDialog(runnables);
-        DialogResult result = dlg.ShowDialog();
-        if (result == DialogResult.OK)
+        DialogResult dlgResult = dlg.ShowDialog();
+        if (dlgResult == DialogResult.OK)
         {
           if (dlg.SelectedRunnable != null)
           {
-            dlg.SelectedRunnable.Runner.Run(dlg.SelectedRunnable.Path);
+            var result = dlg.SelectedRunnable.Runner.Run(dlg.SelectedRunnable.Path);
+            if (!result)
+            {
+              MessageBox.Show($"There was an error starting this file:\n{dlg.SelectedRunnable.Path}", "Conduit error: Run failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
           }
         }
       }

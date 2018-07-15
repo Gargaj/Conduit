@@ -54,11 +54,12 @@ namespace Conduit.Runners
       return result;
     }
 
-    public void Run(string path)
+    public bool Run(string path)
     {
       ProcessStartInfo startInfo = new ProcessStartInfo(Path.GetFileName(path));
       startInfo.WorkingDirectory = Path.GetDirectoryName(path);
-      Process.Start(startInfo);
+      var process = Process.Start(startInfo);
+      return process != null;
     }
   }
 }

@@ -37,23 +37,35 @@ namespace Conduit.Unpackers
             CurrentFile = i++,
             CurrentFilename = entry.FullName,
           });
-          await Task.Run(() =>
+          bool result = await Task.Run(() =>
           {
             try
             {
-              if (entry.FullName.EndsWith("/"))
+              if (!entry.FullName.EndsWith("/") )
               {
-                Directory.CreateDirectory(Path.Combine(targetDirectoryPath, entry.FullName));
+                var path = Path.Combine(targetDirectoryPath, entry.FullName);
+                if(File.Exists(path))
+                {
+                  return true;
+                }
+                var dir = Path.GetDirectoryName(path);
+                if (!Directory.Exists(dir))
+                {
+                  Directory.CreateDirectory(dir);
+                }
+                entry.ExtractToFile(path);
               }
-              else
-              {
-                entry.ExtractToFile(Path.Combine(targetDirectoryPath, entry.FullName));
-              }
+              return true;
             }
             catch (IOException)
             {
+              return false;
             }
           });
+          if (!result)
+          {
+            return false;
+          }
         }
       }
       return true;

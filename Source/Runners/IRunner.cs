@@ -24,6 +24,6 @@ namespace Conduit.Runners
     // are not shown.
     uint Priority { get; }
 
-    void Run(string path);
+    bool Run(string path);
   }
 }

@@ -42,7 +42,7 @@ namespace Conduit.Runners
       }
     }
 
-    public void Run(string path)
+    public bool Run(string path)
     {
       string browserPath = Settings.Options.BrowserPath;
       bool browserFound = false;
@@ -78,8 +78,10 @@ namespace Conduit.Runners
         arguments += $"\"file://{path}\"";
         startInfo.Arguments = arguments;
         startInfo.WorkingDirectory = Path.GetDirectoryName(path);
-        Process.Start(startInfo);
+        var process = Process.Start(startInfo);
+        return process != null;
       }
+      return false;
     }
   }
 }

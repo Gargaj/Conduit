@@ -43,7 +43,7 @@ namespace Conduit.Runners
       }
     }
 
-    public void Run(string path)
+    public bool Run(string path)
     {
       string vicePath = Settings.Options.VicePath;
       bool viceFound = false;
@@ -73,8 +73,10 @@ namespace Conduit.Runners
         ProcessStartInfo startInfo = new ProcessStartInfo(vicePath);
         startInfo.Arguments = $"\"{Path.GetFileName(path)}\"";
         startInfo.WorkingDirectory = Path.GetDirectoryName(path);
-        Process.Start(startInfo);
+        var process = Process.Start(startInfo);
+        return process != null;
       }
+      return false;
     }
   }
 }
