@@ -87,6 +87,17 @@ namespace Conduit
           if (response.Headers["Location"] != null)
           {
             finalURL = response.Headers["Location"];
+            // Handle if redirect has changed the filename
+            filename = Path.GetFileName(new Uri(finalURL).LocalPath);
+          }
+          if (response.Headers["Content-Disposition"] != null)
+          {
+            var regex = new System.Text.RegularExpressions.Regex("filename=['\"]?([^'\"]*)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            var match = regex.Match(response.Headers["Content-Disposition"]);
+            if (match != null && match.Groups.Count == 2)
+            {
+              filename = match.Groups[1].Value;
+            }
           }
           if (response.ContentLength > 0)
           {
@@ -95,8 +106,6 @@ namespace Conduit
         }
       } while (response.Headers["Location"] != null);
 
-      // Handle if redirect has changed the filename
-      filename = Path.GetFileName(new Uri(finalURL).LocalPath);
       localFileName = Path.Combine(targetPath, filename);
 
       var stream = response.GetResponseStream();
