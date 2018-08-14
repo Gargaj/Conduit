@@ -22,7 +22,7 @@ Easy demowatching - a single click bringing you the finest in computer art!
 ## Supported
 * Platforms: Windows, OSX (with Mono), Linux (with Mono)
 * Sites: Pouet, Demozoo
-* Unpackers: ZIP
+* Unpackers: ZIP, Gzip
 * Runnable platforms: Windows, DOS (with DOSBox), C64 (with WinVICE), web browser (not yet autodetecting browser), PICO-8
 ### Possible future expansions
 * Browsers: Edge

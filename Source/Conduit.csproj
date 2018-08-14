@@ -96,6 +96,7 @@
     <Compile Include="Sites\ISite.cs" />
     <Compile Include="Sites\Pouet.cs" />
     <Compile Include="Unpackers\IUnpacker.cs" />
+    <Compile Include="Unpackers\Gzip.cs" />
     <Compile Include="Unpackers\Zip.cs" />
     <EmbeddedResource Include="Dialogs\DownloadDialog.resx">
       <DependentUpon>DownloadDialog.cs</DependentUpon>

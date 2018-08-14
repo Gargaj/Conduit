@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Conduit.Runners;
+﻿using Conduit.Runners;
 using Conduit.Sites;
 using Conduit.Unpackers;
+using System.Collections.Generic;
 
 namespace Conduit
 {
@@ -22,6 +18,7 @@ namespace Conduit
 
       Unpackers = new List<IUnpacker>();
       Unpackers.Add(new Zip());
+      Unpackers.Add(new Gzip());
 
       Runners = new List<IRunner>();
       Runners.Add(new WindowsExecutable());
