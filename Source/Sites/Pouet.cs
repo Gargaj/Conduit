@@ -21,7 +21,7 @@ namespace Conduit.Sites
       public int id { get; set; }
       public string name { get; set; }
       public string download { get; set; }
-      public DateTime releaseDate { get; set; }
+      public string releaseDate { get; set; }
       public List<Group> groups { get; set; }
     }
     internal class Response
@@ -42,13 +42,15 @@ namespace Conduit.Sites
           var response = JsonConvert.DeserializeObject<Response>(contents);
           if (response.success)
           {
+            DateTime date;
+            DateTime.TryParse(response.prod.releaseDate, out date);
             SiteProdInfo info = new SiteProdInfo()
             {
               ID = response.prod.id,
               Name = response.prod.name,
               Group = response.prod.groups?.FirstOrDefault()?.name,
               DownloadLink = response.prod.download,
-              ReleaseDate = response.prod.releaseDate,
+              ReleaseDate = date,
             };
             return info;
           }
