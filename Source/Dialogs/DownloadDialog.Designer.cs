@@ -50,6 +50,7 @@
       // 
       this.downloadText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+      this.downloadText.AutoEllipsis = true;
       this.downloadText.Location = new System.Drawing.Point(112, 12);
       this.downloadText.MaximumSize = new System.Drawing.Size(523, 13);
       this.downloadText.Name = "downloadText";
