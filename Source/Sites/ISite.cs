@@ -16,7 +16,11 @@ namespace Conduit.Sites
   }
   public interface ISite
   {
-    string Host { get; }
+    string ID { get; }
+    string Name { get; }
+    IEnumerable<string> ProdLists { get; }
+    Task<IEnumerable<SiteProdInfo>> RetrieveProdList(string listName);
+
     Task<SiteProdInfo> RetrieveProdInfo(Uri uri);
   }
 }

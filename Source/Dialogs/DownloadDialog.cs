@@ -27,7 +27,7 @@ namespace Conduit
 
     private async Task<SiteProdInfo> GetDownloadURL()
     {
-      var site = Registry.Sites.FirstOrDefault(s => s.Host == _openURL.Host);
+      var site = Registry.Sites.FirstOrDefault(s => s.ID == _openURL.Host);
       if (site == null)
       {
         return null;
@@ -182,7 +182,7 @@ namespace Conduit
 
     private async Task WatchDemo()
     {
-      var site = Registry.Sites.FirstOrDefault(s => s.Host == _openURL.Host);
+      var site = Registry.Sites.FirstOrDefault(s => s.ID == _openURL.Host);
       if (site == null)
       {
         return;
