@@ -106,6 +106,12 @@ namespace Conduit
         }
       } while (response.Headers["Location"] != null);
 
+      if (string.IsNullOrWhiteSpace(filename))
+      {
+        filename = "download.zip";
+        MessageBox.Show($"Unable to deduce filename from {finalURL}; will rename it to {filename} and see where it goes...", "Conduit error: Download dodgy", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+      }
+
       localFileName = Path.Combine(targetPath, filename);
 
       var stream = response.GetResponseStream();
