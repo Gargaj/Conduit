@@ -3,6 +3,7 @@
 ![logo](https://user-images.githubusercontent.com/1702533/34439501-b899a1e6-ecae-11e7-832f-9957af88558b.png)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/xba3kmigbnuffrji?svg=true)](https://ci.appveyor.com/project/Gargaj/conduit)
+[![build-on-push](https://github.com/Gargaj/Conduit/actions/workflows/build-on-push.yml/badge.svg)](https://github.com/Gargaj/Conduit/actions/workflows/build-on-push.yml)
 
 Easy demowatching - a single click bringing you the finest in computer art!
 
