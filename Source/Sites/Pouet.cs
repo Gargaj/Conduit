@@ -48,7 +48,7 @@ namespace Conduit.Sites
     internal class ResponseProdList
     {
       public bool success { get; set; }
-      public Dictionary<string,Prod> prods { get; set; }
+      public List<Prod> prods { get; set; }
     }
 
     public IEnumerable<string> ProdLists => new List<string>()
@@ -88,8 +88,8 @@ namespace Conduit.Sites
       var result = new List<SiteProdInfo>();
       foreach (var prod in response.prods)
       {
-        var prodInfo = prod.Value.ToProdInfo();
-        prodInfo.ID = Convert.ToInt32(prod.Key);
+        var prodInfo = prod.ToProdInfo();
+        prodInfo.ID = prod.id;
         result.Add(prodInfo);
       }
       return result;
