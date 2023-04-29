@@ -34,5 +34,5 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./Source/bin/Release/conduit_setup.exe
-        asset_name: conduit_setup_${{ steps.create_release.outputs.date }}.zip
+        asset_name: conduit_setup_${{ steps.create_release.outputs.date }}
         asset_content_type: application/octet-stream
