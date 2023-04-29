@@ -40,7 +40,15 @@ namespace Conduit
           list.Visible = false;
           page.Controls.Add(list);
 
-          var prodList = await site.RetrieveProdList(siteList);
+          IEnumerable<Sites.SiteProdInfo> prodList = null;
+          try
+          {
+            prodList = await site.RetrieveProdList(siteList);
+          }
+          catch (Exception)
+          {
+            continue;
+          }
           if (prodList != null)
           {
             list.Visible = true;
