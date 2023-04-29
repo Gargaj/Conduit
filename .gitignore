@@ -1,3 +1,4 @@
+/Source/*.args.json
 /Source/.vs/*
 /Source/bin/*
 /Source/obj/*
