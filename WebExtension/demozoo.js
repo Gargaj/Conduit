@@ -10,7 +10,7 @@ if(download_links && download_links.length)
   block.id = "conduit";
   block.innerHTML = 
     "<h3 class='panel__title'>Download and run</h3>\n"+
-    "<div><a href='conduit://demozoo/prod/"+parseInt(prodID[1],10)+"'><b>Click here</b></a> to download and watch this prod immediately with <a href='"+CONDUIT_URL+"'>Conduit</a>"
+    "<div>" + CONDUIT.getLinkString("conduit://demozoo/prod/"+parseInt(prodID[1],10)) + "</div>";
   block.className = "panel";
 
   right.insertBefore(block,right.childNodes[0]);

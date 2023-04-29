@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Conduit browser add-on",
-  "version": "1.0.2.1",
+  "version": "1.0.3",
   "homepage_url": "https://github.com/Gargaj/Conduit",
   "author": "Gargaj",
 
@@ -26,6 +26,13 @@
       ],
       "css": ["demozoo.css"],
       "js": ["common.js","demozoo.js"]
+    },
+    {
+      "matches": [
+        "*://csdb.dk/release/*"
+      ],
+      "css": ["csdb.css"],
+      "js": ["common.js","csdb.js"]
     }
   ],
 
