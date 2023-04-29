@@ -92,7 +92,7 @@ namespace Conduit
           }
           if (response.Headers["Content-Disposition"] != null)
           {
-            var regex = new System.Text.RegularExpressions.Regex("filename=['\"]?([^'\"]*)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            var regex = new System.Text.RegularExpressions.Regex("filename=['\"]?([^'\";]*)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
             var match = regex.Match(response.Headers["Content-Disposition"]);
             if (match != null && match.Groups.Count == 2)
             {
