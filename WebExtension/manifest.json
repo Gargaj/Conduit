@@ -1,7 +1,7 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Conduit browser add-on",
-  "version": "1.0.2",
+  "version": "1.0.2.1",
   "homepage_url": "https://github.com/Gargaj/Conduit",
   "author": "Gargaj",
 
@@ -27,6 +27,12 @@
       "css": ["demozoo.css"],
       "js": ["common.js","demozoo.js"]
     }
-  ]
+  ],
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{57f865f9-aac9-41e9-88a1-6a1edb54eb1a}"
+    }
+  }
 
 }
