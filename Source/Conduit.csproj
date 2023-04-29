@@ -92,6 +92,7 @@
       <DependentUpon>SelectRunnableDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="Sites\CSDb.cs" />
     <Compile Include="Sites\Demozoo.cs" />
     <Compile Include="Sites\ISite.cs" />
     <Compile Include="Sites\Pouet.cs" />

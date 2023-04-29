@@ -15,6 +15,7 @@ namespace Conduit
       Sites = new List<ISite>();
       Sites.Add(new Pouet());
       Sites.Add(new Demozoo());
+      Sites.Add(new CSDb());
 
       Unpackers = new List<IUnpacker>();
       Unpackers.Add(new Zip());
