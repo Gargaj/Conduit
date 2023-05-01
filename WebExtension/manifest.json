@@ -5,7 +5,7 @@
   "homepage_url": "https://github.com/Gargaj/Conduit",
   "author": "Gargaj",
 
-  "description": "Adds conduit:// protocol links to Pouet and Demozoo",
+  "description": "Adds conduit:// protocol links to Pouet, Demozoo and CSDb",
 
   "icons": {
     "48": "48.png",
