@@ -1,4 +1,4 @@
-var download_table = document.querySelector("table table tr:nth-child(4) table table:nth-of-type(6)");
+var download_table = document.querySelector("#downloadLinks");
 if (download_table)
 {
   var after = download_table.nextSibling;
