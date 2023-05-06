@@ -4,6 +4,12 @@ jobs:
   create_release:
     runs-on: windows-2019
     steps:
+    - name: Get version
+      id: version
+      run: |
+        $m = Select-String -path Source\Properties\AssemblyInfo.cs 'AssemblyVersion\(\"([\d\.]+)\"\)'
+        echo "version=$($m.Matches.Groups[1].Value)" >> $env:GITHUB_OUTPUT
+        echo "version_sanitized=$($m.Matches.Groups[1].Value.Replace('.','_'))" >> $env:GITHUB_OUTPUT
     - name: Checkout
       uses: actions/checkout@v3
     - name: Setup MSBuild
@@ -14,25 +20,13 @@ jobs:
       uses: joncloud/makensis-action@v3.7
       with:
         script-file: ./Source/bin/Release/Conduit.nsi
-    - name: Get date
-      id: date
-      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Rename installer
+      run: |
+        Rename-Item -Path ./Source/bin/Release/conduit_setup.exe -NewName conduit_setup_${{ steps.version.outputs.version_sanitized }}.exe
+    - name: Create and Upload Release
+      uses: softprops/action-gh-release@v1
       with:
-        tag_name: ${{ steps.date.outputs.date }}
-        release_name: ${{ steps.date.outputs.date }}
+        name: ${{ steps.version.outputs.version }}
+        tag_name: ${{ steps.version.outputs.version }}
         draft: true
-    - name: Upload Release Asset
-      id: upload-release-asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./Source/bin/Release/conduit_setup.exe
-        asset_name: conduit_setup_${{ steps.create_release.outputs.date }}
-        asset_content_type: application/octet-stream
+        files: ./Source/bin/Release/conduit_setup_${{ steps.version.outputs.version_sanitized }}.exe
