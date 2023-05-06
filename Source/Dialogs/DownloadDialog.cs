@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -20,6 +21,9 @@ namespace Conduit
     {
       _openURL = new Uri(openURL);
       InitializeComponent();
+
+      MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width * 2, Height);
+      MinimumSize = new Size(Width, Height);
     }
 
     private async Task<SiteProdInfo> GetDownloadURL()
@@ -41,7 +45,7 @@ namespace Conduit
       }
     }
 
-    public string GetFormattedFileSize(int size)
+    public string GetFormattedFileSize(ulong size)
     {
       double len = size;
       int order = 0;
@@ -70,6 +74,8 @@ namespace Conduit
 
       string finalURL = url;
       WebResponse response = null;
+      ulong fullSize = 0;
+      ulong sizeGranularity = 1;
       do
       {
         // File size problem due to C# runtime bug: https://stackoverflow.com/a/34846577
@@ -98,7 +104,8 @@ namespace Conduit
           }
           if (response.ContentLength > 0)
           {
-            downloadProgress.Maximum = (int)response.ContentLength;
+            fullSize = (ulong)response.ContentLength;
+            downloadProgress.Maximum = 10000;
           }
         }
       } while (response.Headers["Location"] != null);
@@ -115,31 +122,35 @@ namespace Conduit
 
       int bufferSize = 1024 * 1024;
       var bytes = new byte[bufferSize];
-      var bytesRead = 0;
       var tmpFile = localFileName + ".$$$";
       if (File.Exists(tmpFile))
       {
         File.Delete(tmpFile);
       }
+      var oldTitleBar = Text;
       using (FileStream fileStream = File.Open(tmpFile, FileMode.CreateNew))
       {
-        var totalBytes = 0;
+        ulong totalBytes = 0;
+        var bytesRead = 0;
         do
         {
           bytesRead = await stream.ReadAsync(bytes, 0, bufferSize);
           fileStream.Write(bytes, 0, bytesRead);
-          downloadProgress.Increment(bytesRead);
+          var progress = (int)(totalBytes / (float)fullSize * 10000.0f);
+          downloadProgress.Value = progress;
           if (downloadProgress.Maximum == 0)
           {
             downloadText.Text = $"Downloading [{filename}] ({GetFormattedFileSize(totalBytes)})...";
           }
           else
           {
-            downloadText.Text = $"Downloading [{filename}] ({GetFormattedFileSize(totalBytes)} / {GetFormattedFileSize(downloadProgress.Maximum)})...";
+            downloadText.Text = $"Downloading [{filename}] ({GetFormattedFileSize(totalBytes)} / {GetFormattedFileSize((ulong)downloadProgress.Maximum)})...";
+            Text = $"[{progress/100}%] {oldTitleBar}";
           }
-          totalBytes += bytesRead;
+          totalBytes += (ulong)bytesRead;
         } while (bytesRead > 0);
       }
+      Text = oldTitleBar;
       downloadText.Text = "Download finished!";
 
       if (File.Exists(localFileName))
@@ -197,7 +208,7 @@ namespace Conduit
         return;
       }
 
-      this.Text = "Conduit - downloading demo: " + prodInfo.Name;
+      Text = "Conduit - downloading demo: " + prodInfo.Name;
 
       var url = prodInfo.DownloadLink;
       TransformURL(ref url);

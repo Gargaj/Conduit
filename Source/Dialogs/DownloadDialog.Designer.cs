@@ -93,13 +93,13 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(584, 122);
+      this.ClientSize = new System.Drawing.Size(584, 121);
       this.Controls.Add(this.pictureBox1);
       this.Controls.Add(this.unpackText);
       this.Controls.Add(this.unpackProgress);
       this.Controls.Add(this.downloadText);
       this.Controls.Add(this.downloadProgress);
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Name = "DownloadDialog";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
