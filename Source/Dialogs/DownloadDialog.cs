@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using System.Windows.Forms;
@@ -40,7 +37,7 @@ namespace Conduit
     {
       if (url.StartsWith("https://files.scene.org/view/"))
       {
-        url = url.Replace("https://files.scene.org/view/", "https://files.scene.org/get:hu-http/");
+        url = url.Replace("https://files.scene.org/view/", "https://files.scene.org/get/");
       }
     }
 
