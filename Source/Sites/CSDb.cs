@@ -62,9 +62,9 @@ namespace Conduit.Sites
         prodInfo.DownloadLink = document?.DocumentElement?.SelectSingleNode("//Release/DownloadLinks/DownloadLink/Link")?.InnerText ?? string.Empty;
 
         prodInfo.ReleaseDate = new DateTime(
-          Convert.ToInt32(document?.DocumentElement?.SelectSingleNode("//Release/ReleaseYear")?.InnerText ?? "0"),
-          Convert.ToInt32(document?.DocumentElement?.SelectSingleNode("//Release/ReleaseMonth")?.InnerText ?? "0"),
-          Convert.ToInt32(document?.DocumentElement?.SelectSingleNode("//Release/ReleaseDay")?.InnerText ?? "0")
+          Convert.ToInt32(document?.DocumentElement?.SelectSingleNode("//Release/ReleaseYear")?.InnerText ?? "1"),
+          Convert.ToInt32(document?.DocumentElement?.SelectSingleNode("//Release/ReleaseMonth")?.InnerText ?? "1"),
+          Convert.ToInt32(document?.DocumentElement?.SelectSingleNode("//Release/ReleaseDay")?.InnerText ?? "1")
         );
         return prodInfo;
       }
