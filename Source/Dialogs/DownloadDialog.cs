@@ -144,7 +144,7 @@ namespace Conduit
           }
           else
           {
-            downloadText.Text = $"Downloading [{filename}] ({GetFormattedFileSize(totalBytes)} / {GetFormattedFileSize((ulong)downloadProgress.Maximum)})...";
+            downloadText.Text = $"Downloading [{filename}] ({GetFormattedFileSize(totalBytes)} / {GetFormattedFileSize(fullSize)})...";
             Text = $"[{progress/100}%] {oldTitleBar}";
           }
           totalBytes += (ulong)bytesRead;
