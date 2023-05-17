@@ -26,7 +26,7 @@ jobs:
     - name: Create and Upload Release
       uses: softprops/action-gh-release@v1
       with:
-        name: ${{ steps.version.outputs.version }}
-        tag_name: ${{ steps.version.outputs.version }}
+        name: v${{ steps.version.outputs.version }}
+        tag_name: v${{ steps.version.outputs.version }}
         draft: true
         files: ./Source/bin/Release/conduit_setup_${{ steps.version.outputs.version_sanitized }}.exe
