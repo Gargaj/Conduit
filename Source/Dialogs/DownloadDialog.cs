@@ -278,7 +278,7 @@ namespace Conduit
       else if (runnables.Count > 1)
       {
         SelectRunnableDialog dlg = new SelectRunnableDialog(runnables);
-        DialogResult dlgResult = dlg.ShowDialog();
+        DialogResult dlgResult = dlg.ShowDialog(this);
         if (dlgResult == DialogResult.OK)
         {
           if (dlg.SelectedRunnable != null)
