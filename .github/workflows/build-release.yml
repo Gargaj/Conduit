@@ -4,14 +4,14 @@ jobs:
   create_release:
     runs-on: windows-2019
     steps:
+    - name: Checkout
+      uses: actions/checkout@v3
     - name: Get version
       id: version
       run: |
         $m = Select-String -path Source\Properties\AssemblyInfo.cs 'AssemblyVersion\(\"([\d\.]+)\"\)'
         echo "version=$($m.Matches.Groups[1].Value)" >> $env:GITHUB_OUTPUT
         echo "version_sanitized=$($m.Matches.Groups[1].Value.Replace('.','_'))" >> $env:GITHUB_OUTPUT
-    - name: Checkout
-      uses: actions/checkout@v3
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
     - name: Build Release
