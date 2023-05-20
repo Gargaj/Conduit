@@ -30,5 +30,5 @@ Easy demowatching - a single click bringing you the finest in computer art!
 * Runners: Amiga (with WinUAE), Atari (STeeM), other uses of WinVICE
 * Unpackers: RAR, LHA
 
-# Companion apps
+## Companion apps
 * [Ultimate Launcher](https://github.com/kebby/ultimate-launcher) for one-click launching demos on an U1541-equipped C64
