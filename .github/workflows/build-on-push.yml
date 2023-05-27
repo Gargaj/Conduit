@@ -8,6 +8,10 @@ jobs:
       uses: actions/checkout@v3
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
+    - name: Setup Nuget
+      uses: Nuget/setup-nuget@v1.0.5
+    - name: Restore Nuget packages
+      run: nuget restore .\Source\Conduit.csproj
     - name: Build Debug
       run: msbuild .\Source\Conduit.sln /t:build /p:Configuration=Debug
     - name: Build Release
