@@ -23,12 +23,13 @@ Easy demowatching - a single click bringing you the finest in computer art!
 ## Supported
 * Platforms: Windows, OSX (with Mono), Linux (with Mono)
 * Sites: Pouet, Demozoo, CSDb
-* Unpackers: ZIP, Gzip
+* Unpackers: [Anything that's supported by 7z](https://github.com/adoconnection/SevenZipExtractor/blob/master/README.md#supported-formats)
 * Runnable platforms: Windows, DOS (with DOSBox), C64 (with WinVICE), web browser (not yet autodetecting browser), PICO-8
+
 ### Possible future expansions
 * Browsers: Edge
 * Runners: Amiga (with WinUAE), Atari (STeeM), other uses of WinVICE
-* Unpackers: RAR, LHA
+* Unpackers: LHA
 
 ## Companion apps
 * [Ultimate Launcher](https://github.com/kebby/ultimate-launcher) for one-click launching demos on an U1541-equipped C64

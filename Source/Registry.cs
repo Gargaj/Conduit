@@ -18,6 +18,7 @@ namespace Conduit
       Sites.Add(new CSDb());
 
       Unpackers = new List<IUnpacker>();
+      Unpackers.Add(new SevenZip());
       Unpackers.Add(new Zip());
       Unpackers.Add(new Gzip());
 

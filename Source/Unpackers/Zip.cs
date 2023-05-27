@@ -12,6 +12,7 @@ namespace Conduit.Unpackers
   public class Zip : IUnpacker
   {
     public event EventHandler<UnpackingProgressArgs> ProgressChanged;
+    public string Error { get; private set;  }
 
     public bool CanUnpack(string archiveFile)
     {
@@ -57,8 +58,9 @@ namespace Conduit.Unpackers
               }
               return true;
             }
-            catch (IOException)
+            catch (IOException e)
             {
+              Error = e.ToString();
               return false;
             }
           });

@@ -18,9 +18,6 @@ VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "1.0"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "Installer application for Conduit"
 
 ReserveFile "${NSISDIR}\Plugins\x86-ansi\InstallOptions.dll"
-#ReserveFile "welcome.bmp"
-#ReserveFile "runClient.ini"
-#ReserveFile "welcomeLogo.ini"
 
 Page directory
 Page instfiles
@@ -30,8 +27,13 @@ UninstPage instfiles
 
 Section "install"
   SetOutPath $INSTDIR
-  File Conduit.exe
-  File Newtonsoft.Json.dll
+  File "Conduit.exe"
+  File "Newtonsoft.Json.dll"
+  File "SevenZipExtractor.dll"
+  CreateDirectory $INSTDIR\x64
+  CreateDirectory $INSTDIR\x86
+  File /oname=x64\7z.dll "x64\7z.dll"
+  File /oname=x86\7z.dll "x86\7z.dll"
   WriteUninstaller $INSTDIR\Uninstall.exe
   
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${CLIENT_NAME}" "DisplayName" "${CLIENT_NAME}"
@@ -48,7 +50,10 @@ Section "Uninstall"
   SetOutPath $PROGRAMFILES32
   Delete "$INSTDIR\Conduit.exe"
   Delete "$INSTDIR\Newtonsoft.Json.dll"
+  Delete "$INSTDIR\SevenZipExtractor.dll"
   Delete "$INSTDIR\Uninstall.exe"
+  Delete "$INSTDIR\x64\7z.dll"
+  Delete "$INSTDIR\x86\7z.dll"
   RMDir $INSTDIR
   RMDir /r "$SMPROGRAMS\${CLIENT_NAME}"
   Delete "$DESKTOP\${CLIENT_NAME}.lnk"

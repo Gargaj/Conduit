@@ -75,7 +75,6 @@ namespace Conduit
       string finalURL = url;
       WebResponse response = null;
       ulong fullSize = 0;
-      ulong sizeGranularity = 1;
       do
       {
         // File size problem due to C# runtime bug: https://stackoverflow.com/a/34846577
@@ -248,15 +247,21 @@ namespace Conduit
         }
         runnables.AddRange(runner.GetRunnableFiles(extractPath).Select(s => new Runners.Runnable() { Path = s, Runner = runner }));
       }
-      if (runnables.Count == 0)
+
+      if (unpacker != null && !extractSuccessful)
+      {
+        // We found an unpacker but it failed
+        var msg = $"There's been an error unpacking the following file:\n{localFileName}";
+        if (!string.IsNullOrEmpty(unpacker.Error))
+        {
+          msg += "\n\n" + unpacker.Error;
+        }
+        MessageBox.Show(msg, "Conduit error: Unpack failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+      else if (runnables.Count == 0)
       {
         // Nothing found, error
-        if (unpacker != null && !extractSuccessful)
-        {
-          // We found an unpacker but it failed
-          MessageBox.Show($"There's been an error unpacking the following file:\n{localFileName}", "Conduit error: Unpack failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        else if (unpacker != null && extractSuccessful)
+        if (unpacker != null && extractSuccessful)
         {
           // We found and successfully used an unpacker, but couldn't find a runner
           MessageBox.Show($"We couldn't find a way to run the following file:\n{localFileName}", "Conduit error: Run failed", MessageBoxButtons.OK, MessageBoxIcon.Error);

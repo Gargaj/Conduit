@@ -8,6 +8,7 @@ namespace Conduit.Unpackers
   public class Gzip : IUnpacker
   {
     public event EventHandler<UnpackingProgressArgs> ProgressChanged;
+    public string Error { get; private set; }
 
     public bool CanUnpack(string archiveFile)
     {
@@ -31,14 +32,22 @@ namespace Conduit.Unpackers
           {
             using (var resultStream = File.OpenWrite(Path.Combine(targetDirectoryPath, unpackedFilename)))
             {
+              ProgressChanged?.Invoke(this, new UnpackingProgressArgs()
+              {
+                TotalFiles = 1,
+                CurrentFile = 0,
+                CurrentFilename = unpackedFilename,
+              });
+
               zipStream.CopyTo(resultStream);
               return true;
             }
           }
         }
       }
-      catch
+      catch(Exception e)
       {
+        Error = e.ToString();
         return false;
       }
     }

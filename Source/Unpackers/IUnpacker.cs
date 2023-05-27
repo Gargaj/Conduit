@@ -15,6 +15,7 @@ namespace Conduit.Unpackers
   public interface IUnpacker
   {
     event EventHandler<UnpackingProgressArgs> ProgressChanged;
+    string Error { get; }
     bool CanUnpack(string archiveFile);
     Task<bool> Unpack(string archiveFile, string targetDirectoryPath);
   }
