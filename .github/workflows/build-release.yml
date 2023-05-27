@@ -14,6 +14,10 @@ jobs:
         echo "version_sanitized=$($m.Matches.Groups[1].Value.Replace('.','_'))" >> $env:GITHUB_OUTPUT
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
+    - name: Setup Nuget
+      uses: Nuget/setup-nuget@v1.0.5
+    - name: Restore Nuget packages
+      run: nuget restore .\Source\Conduit.csproj
     - name: Build Release
       run: msbuild .\Source\Conduit.sln /t:build /p:Configuration=Release
     - name: Create NSIS installer
