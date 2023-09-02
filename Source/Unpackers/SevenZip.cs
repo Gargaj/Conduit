@@ -59,7 +59,8 @@ namespace Conduit.Unpackers
             {
               Directory.CreateDirectory(dir);
             }
-            entry.Extract(path);
+            entry.Extract(path); // COM-object call, has to be on main thread
+            await Task.Delay(TimeSpan.FromMilliseconds(10)); // Let UI thread breathe a bit
           }
           catch (IOException e)
           {
