@@ -135,14 +135,14 @@ namespace Conduit
         {
           bytesRead = await stream.ReadAsync(bytes, 0, bufferSize);
           fileStream.Write(bytes, 0, bytesRead);
-          var progress = (int)(totalBytes / (float)fullSize * 10000.0f);
-          downloadProgress.Value = progress;
           if (downloadProgress.Maximum == 0)
           {
             downloadText.Text = $"Downloading [{filename}] ({GetFormattedFileSize(totalBytes)})...";
           }
           else
           {
+            var progress = (int)(totalBytes / (float)fullSize * 10000.0f);
+            downloadProgress.Value = progress;
             downloadText.Text = $"Downloading [{filename}] ({GetFormattedFileSize(totalBytes)} / {GetFormattedFileSize(fullSize)})...";
             Text = $"[{progress/100}%] {oldTitleBar}";
           }
