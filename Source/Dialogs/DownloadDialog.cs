@@ -62,8 +62,9 @@ namespace Conduit
     {
       var filename = Path.GetFileName(new Uri(url).LocalPath);
       var localFileName = Path.Combine(targetPath, filename);
+      var fileinfo = new System.IO.FileInfo(localFileName);
 
-      if (File.Exists(localFileName))
+      if (File.Exists(localFileName) && fileinfo.Length!=0) // TODO: re-download if unpack files
       {
         downloadText.Text = "Already downloaded.";
         return localFileName;
@@ -220,6 +221,13 @@ namespace Conduit
       var localFileName = await DownloadFile(url, path);
       if (localFileName == null)
       {
+        return;
+      }
+      var fileinfo = new System.IO.FileInfo(localFileName);
+      if (fileinfo.Length == 0)
+      {
+        File.Delete(localFileName);
+        MessageBox.Show($"Download failed! (0 byte download)", "Conduit error: Download failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
         return;
       }
 
