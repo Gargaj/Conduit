@@ -7,7 +7,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v2
     - name: Setup Nuget
       uses: Nuget/setup-nuget@v1.0.5
     - name: Restore Nuget packages

@@ -13,7 +13,7 @@ jobs:
         echo "version=$($m.Matches.Groups[1].Value)" >> $env:GITHUB_OUTPUT
         echo "version_sanitized=$($m.Matches.Groups[1].Value.Replace('.','_'))" >> $env:GITHUB_OUTPUT
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v2
     - name: Setup Nuget
       uses: Nuget/setup-nuget@v1.0.5
     - name: Restore Nuget packages
