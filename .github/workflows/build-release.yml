@@ -21,14 +21,14 @@ jobs:
     - name: Build Release
       run: msbuild .\Source\Conduit.sln /t:build /p:Configuration=Release
     - name: Create NSIS installer
-      uses: joncloud/makensis-action@v3.7
+      uses: joncloud/makensis-action@v4.1
       with:
         script-file: ./Source/bin/Release/Conduit.nsi
     - name: Rename installer
       run: |
         Rename-Item -Path ./Source/bin/Release/conduit_setup.exe -NewName conduit_setup_${{ steps.version.outputs.version_sanitized }}.exe
     - name: Create and Upload Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         name: v${{ steps.version.outputs.version }}
         tag_name: v${{ steps.version.outputs.version }}
