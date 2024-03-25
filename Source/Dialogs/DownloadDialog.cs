@@ -10,6 +10,7 @@ using System.Windows.Threading;
 using System.Windows.Forms;
 using Conduit.Sites;
 using Conduit.Unpackers;
+using System.Security.Cryptography;
 
 namespace Conduit
 {
@@ -115,6 +116,8 @@ namespace Conduit
         filename = "download.zip";
         MessageBox.Show($"Unable to deduce filename from {finalURL}; will rename it to {filename} and see where it goes...", "Conduit error: Download dodgy", MessageBoxButtons.OK, MessageBoxIcon.Warning);
       }
+
+      filename = string.Join("_", filename.Split(Path.GetInvalidFileNameChars(), StringSplitOptions.RemoveEmptyEntries));
 
       localFileName = Path.Combine(targetPath, filename);
 
