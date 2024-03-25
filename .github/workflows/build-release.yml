@@ -5,7 +5,7 @@ jobs:
     runs-on: windows-2019
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Get version
       id: version
       run: |
@@ -15,7 +15,7 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
     - name: Setup Nuget
-      uses: Nuget/setup-nuget@v1.0.5
+      uses: Nuget/setup-nuget@v2
     - name: Restore Nuget packages
       run: nuget restore .\Source\Conduit.sln
     - name: Build Release
