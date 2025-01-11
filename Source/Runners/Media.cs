@@ -15,6 +15,7 @@ namespace Conduit.Runners
       "*.avi",
       "*.mpg",
       "*.mp4",
+      "*.mkv",
       "*.mov",
 
       "*.jpg",
@@ -25,6 +26,7 @@ namespace Conduit.Runners
       "*.mp3",
       "*.ogg",
       "*.flac",
+      "*.wav",
     };
 
     public string Name => "Media";
