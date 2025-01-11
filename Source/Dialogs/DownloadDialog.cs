@@ -234,7 +234,12 @@ namespace Conduit
         return;
       }
 
-      var extractPath = Path.Combine(path, Path.GetFileNameWithoutExtension(localFileName));
+      var dirName = Path.GetFileNameWithoutExtension(localFileName);
+      if (dirName.Length > 32)
+      {
+        dirName = dirName.Substring(0, 32);
+      }
+      var extractPath = Path.Combine(path, dirName);
       var unpacker = FindUnpacker(localFileName);
       var extractSuccessful = false;
       if (unpacker == null)
