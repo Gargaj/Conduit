@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Conduit.Sites;
 using Conduit.Unpackers;
 using System.Security.Cryptography;
+using System.Diagnostics;
 
 namespace Conduit
 {
@@ -54,9 +55,9 @@ namespace Conduit
       while (len >= 1024 && order < sizes.Length - 1)
       {
         order++;
-        len = len / 1024;
+        len = len / 1024.0;
       }
-      return String.Format("{0:0.##} {1}", len, sizes[order]);
+      return String.Format("{0:0.00} {1}", len, sizes[order]);
     }
 
     private async Task<string> DownloadFile(string url, string targetPath)
@@ -131,23 +132,40 @@ namespace Conduit
         File.Delete(tmpFile);
       }
       var oldTitleBar = Text;
+      var downloadSpeedTimer = new Stopwatch();
+      downloadSpeedTimer.Start();
+      long downloadSpeedBytes = 0;
       using (FileStream fileStream = File.Open(tmpFile, FileMode.CreateNew))
       {
         ulong totalBytes = 0;
         var bytesRead = 0;
+        float speedBPS = 0.0f;
         do
         {
           bytesRead = await stream.ReadAsync(bytes, 0, bufferSize);
           fileStream.Write(bytes, 0, bytesRead);
+
+          if (downloadSpeedTimer.ElapsedMilliseconds > 1000)
+          {
+            speedBPS = downloadSpeedBytes * 1000.0f / downloadSpeedTimer.ElapsedMilliseconds;
+
+            downloadSpeedTimer.Restart();
+            downloadSpeedBytes = 0;
+          }
+
+          var speedStr = speedBPS > 0 ? (speedBPS > 2 * 1024 * 1024 ? $"; {speedBPS / (1024.0 * 1024.0):0.00} MBps" : $"; {speedBPS / (1024.0):0.00} KBps") : string.Empty;
+
+          downloadSpeedBytes += bytesRead;
+
           if (downloadProgress.Maximum == 0)
           {
-            downloadText.Text = $"Downloading [{filename}] ({GetFormattedFileSize(totalBytes)})...";
+            downloadText.Text = $"Downloading [{filename}] ({GetFormattedFileSize(totalBytes)}{speedStr})...";
           }
           else
           {
             var progress = (int)(totalBytes / (float)fullSize * 10000.0f);
             downloadProgress.Value = progress;
-            downloadText.Text = $"Downloading [{filename}] ({GetFormattedFileSize(totalBytes)} / {GetFormattedFileSize(fullSize)})...";
+            downloadText.Text = $"Downloading [{filename}] ({GetFormattedFileSize(totalBytes)} / {GetFormattedFileSize(fullSize)}{speedStr})...";
             Text = $"[{progress/100}%] {oldTitleBar}";
           }
           totalBytes += (ulong)bytesRead;
