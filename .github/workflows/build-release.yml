@@ -2,7 +2,7 @@ name: build-release
 on: [workflow_dispatch]
 jobs:
   create_release:
-    runs-on: windows-latest
+    runs-on: windows-2022 # not latest as per https://github.com/joncloud/makensis-action/issues/39
     steps:
     - name: Checkout
       uses: actions/checkout@v5
