@@ -28,7 +28,7 @@ jobs:
       run: |
         Rename-Item -Path ./Source/bin/Release/conduit_setup.exe -NewName conduit_setup_${{ steps.version.outputs.version_sanitized }}.exe
     - name: Create and Upload Release
-      uses: softprops/action-gh-release@v6
+      uses: softprops/action-gh-release@v2.5.3
       with:
         name: v${{ steps.version.outputs.version }}
         tag_name: v${{ steps.version.outputs.version }}
