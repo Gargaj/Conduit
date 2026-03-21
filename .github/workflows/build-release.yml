@@ -2,10 +2,14 @@ name: build-release
 on: [workflow_dispatch]
 jobs:
   create_release:
-    runs-on: windows-2022 # not latest as per https://github.com/joncloud/makensis-action/issues/39
+    runs-on: windows-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v5
+    - name: Install NSIS
+      uses: repolevedavaj/install-nsis@v1.0.1
+      with:
+        nsis-version: '3.10'      
     - name: Get version
       id: version
       run: |
