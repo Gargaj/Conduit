@@ -12,6 +12,7 @@ namespace Conduit
   {
     public class OptionsObject
     {
+      public string DemozooAPIKey { get; set; }
       public string DemoPath { get; set; }
       public string VicePath { get; set; }
       public string DOSBoxPath { get; set; }

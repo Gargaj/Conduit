@@ -58,6 +58,11 @@ namespace Conduit.Sites
     {
       using (var wc = new System.Net.WebClient())
       {
+        if (string.IsNullOrEmpty(Settings.Options.DemozooAPIKey))
+        {
+          throw new Exception("Please specify a Demozoo API Key in the options!");
+        }
+        url += (url.Contains("?") ? "&" : "?") + "api_key=" + Settings.Options.DemozooAPIKey;
         string contents = await wc.DownloadStringTaskAsync(new Uri(url));
         if (contents != null && contents.Length > 0)
         {

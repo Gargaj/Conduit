@@ -24,6 +24,7 @@ namespace Conduit
       textBrowserPath.Text = Settings.Options.BrowserPath;
       checkBoxBrowserAddFlag.Checked = Settings.Options.BrowserAddFileAccessFlag;
       textPICO8Path.Text = Settings.Options.PICO8Path;
+      textDemozooAPIKey.Text = Settings.Options.DemozooAPIKey;
     }
 
     private void buttonOK_Click(object sender, EventArgs e)
@@ -34,6 +35,7 @@ namespace Conduit
       Settings.Options.BrowserPath = textBrowserPath.Text;
       Settings.Options.BrowserAddFileAccessFlag = checkBoxBrowserAddFlag.Checked;
       Settings.Options.PICO8Path = textPICO8Path.Text;
+      Settings.Options.DemozooAPIKey = textDemozooAPIKey.Text;
       Settings.SaveSettings();
       DialogResult = DialogResult.OK;
     }
