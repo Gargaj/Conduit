@@ -5,11 +5,11 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v5
+      uses: actions/checkout@v7
     - name: Install NSIS
-      uses: repolevedavaj/install-nsis@v1.1.0
+      uses: repolevedavaj/install-nsis@v1.3.0
       with:
-        nsis-version: '3.10'      
+        nsis-version: '3.10'
     - name: Get version
       id: version
       run: |
@@ -19,7 +19,7 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v3
     - name: Setup Nuget
-      uses: Nuget/setup-nuget@v2
+      uses: Nuget/setup-nuget@v4
     - name: Restore Nuget packages
       run: nuget restore .\Source\Conduit.sln
     - name: Build Release
@@ -32,7 +32,7 @@ jobs:
       run: |
         Rename-Item -Path ./Source/bin/Release/conduit_setup.exe -NewName conduit_setup_${{ steps.version.outputs.version_sanitized }}.exe
     - name: Create and Upload Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         name: v${{ steps.version.outputs.version }}
         tag_name: v${{ steps.version.outputs.version }}
